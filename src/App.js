@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import JoinPage from "./routes/JoinPage/JoinPage";
+import TrelloPage from "./routes/TrelloPage/TrelloPage";
+import { Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/login" element={<JoinPage />} />
+        <Route path="/trello" element={<TrelloPage />} />
+      </Routes>
+      <Link to="/login">로그인!!!</Link>
+      <Link to="/trello">트렐로!!!</Link>
+    </>
   );
 }
 
