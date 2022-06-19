@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ol,
+ul {
+  list-style: none;
+}
+input {
+  border: none;
+  outline: none;
+}
+button {
+  border: none;
+  background: transparent;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 585px;
+  width: 100%;
+}
+
+.container .logo {
+  display: block;
+  height: 43px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.container .joinBox {
+  background-color: #ffffff;
+  width: 400px;
+  border-radius: 3px;
+  padding: 25px 40px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container .joinBox > h1 {
+  text-align: center;
+  color: #5e6c84;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+.container .joinBox .joinForm > input {
+  width: 302px;
+  height: 44px;
+  padding: 7px;
+  background: #fafbfc;
+  margin-bottom: 20px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+
+.container .joinBox .joinForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .joinBox .joinForm > p {
+  text-align: center;
+  width: 320px;
+  margin: 20px 0 20px 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5e6c84;
+}
+
+.container .joinBox .loginForm .joinBtn {
+  font-size: 15px;
+  width: 302px;
+  height: 44px;
+  padding: 7px;
+  background: #61bd4f;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+}
+.container .joinBox .loginForm > input {
+  width: 302px;
+  height: 44px;
+  padding: 7px;
+  background: #fafbfc;
+  margin-bottom: 20px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+.container .joinBox .loginForm > input:hover {
+  border-color: #0077c3;
+}
+.container .joinBox .joinForm > input:hover {
+  border-color: #0077c3;
+}
+.container .joinBox .loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .joinBox .loginForm > p {
+  text-align: center;
+  width: 320px;
+  margin: 20px 0 20px 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5e6c84;
+}
+.container .joinBox .joinForm .joinBtn {
+  font-size: 15px;
+  width: 302px;
+  height: 44px;
+  padding: 7px;
+  background: #61bd4f;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.container .joinBox .loginForm .loginBtn {
+  font-size: 15px;
+  width: 302px;
+  height: 44px;
+  padding: 7px;
+  background: #61bd4f;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+}
+.container .joinBox .hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid hsl(0, 0%, 80%);
+  margin: 30px;
+  padding: 0;
+}
+
+.container .joinBox > p {
+  text-align: center;
+  color: #0052cc;
+}
