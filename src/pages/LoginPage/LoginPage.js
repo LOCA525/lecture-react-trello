@@ -1,16 +1,35 @@
 import "./style.css";
 import Logo from "../../img/logo.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoinPage = () => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value }); /// <== 요거 멋짐
-    console.log(loginForm);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3010/login", loginForm)
+      .then((res) => {
+        console.log("포스트성공", res);
+        if (res.status === 200) {
+          navigate("/trello");
+        }
+        const res2 = res;
+        console.log(res2);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -18,7 +37,7 @@ const LoinPage = () => {
       <img className="logo" src={Logo} alt="logo!" />
       <div className="joinBox">
         <h1>Log in to Trello</h1>
-        <form typeof="submit" className="loginForm">
+        <form onSubmit={onSubmit} typeof="submit" className="loginForm">
           <input
             className="emailInput"
             name="email"
