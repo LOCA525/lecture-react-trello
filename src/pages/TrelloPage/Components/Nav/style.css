@@ -1,0 +1,20 @@
+.Nav {
+  width: 100%;
+}
+
+.Nav .title {
+  padding: 15px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #1d232e;
+  color: #fff;
+}
+
+.Nav .mainBoard {
+  padding: 20px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 30px;
+  background-color: #40506c;
+}

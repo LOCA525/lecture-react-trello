@@ -50,7 +50,7 @@ const LoinPage = () => {
             className="passwordInput"
             onChange={onChange}
             name="password"
-            valkue={loginForm.password}
+            value={loginForm.password}
             type="password"
             placeholder="Enter Password"
           />
