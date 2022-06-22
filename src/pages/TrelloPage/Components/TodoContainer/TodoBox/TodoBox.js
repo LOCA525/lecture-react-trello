@@ -3,12 +3,12 @@ import "./style.css";
 const TodoBox = () => {
   return (
     <div className="TodoBox">
-      <div className="todoTitle">todoTitle</div>
-      <button className="todoBoxDeleteBtn">🅧</button>
+      <div className="todoTitle">
+        todoTitle
+        <button className="todoBoxDeleteBtn">🅧</button>
+      </div>
+
       <ul className="todos">
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
         <TodoCard />
         <TodoCard />
         <TodoCard />

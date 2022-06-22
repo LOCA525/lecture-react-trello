@@ -24,8 +24,14 @@ const LoinPage = () => {
         if (res.status === 200) {
           navigate("/trello");
         }
-        const res2 = res;
-        console.log(res2);
+        const data = res.data;
+        const accessToken = data.accessToken;
+        const user = data.user;
+        const email = user.email;
+
+        console.log(res.data);
+        console.log(accessToken);
+        console.log(email);
       })
       .catch((err) => {
         console.log(err);

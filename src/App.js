@@ -10,8 +10,8 @@ function App() {
         <Route path="/login" element={<LoinPage />} />
         <Route path="/trello" element={<TrelloPage />} />
       </Routes>
-      {/* <Link to="/login">로그인!!!</Link>
-      <Link to="/trello">트렐로!!!</Link> */}
+      <Link to="/login">로그인!!!</Link>
+      <Link to="/trello">트렐로!!!</Link>
     </>
   );
 }

@@ -1,5 +1,6 @@
 .Nav {
   width: 100%;
+  position: relative;
 }
 
 .Nav .title {
@@ -9,6 +10,15 @@
   text-align: center;
   background-color: #1d232e;
   color: #fff;
+}
+
+.Nav .userName {
+  font-size: 15px;
+  float: left;
+  background-color: #1d232e;
+  color: #fff;
+  position: absolute;
+  top: 40px;
 }
 
 .Nav .mainBoard {

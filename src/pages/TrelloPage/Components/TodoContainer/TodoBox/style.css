@@ -22,8 +22,11 @@
   line-height: 35px;
   color: #40506c;
   margin-bottom: 10px;
+  transition: 0.3s;
 }
-
+.todoTitle:hover {
+  background-color: #fff;
+}
 .todoBoxDeleteBtn {
   cursor: pointer;
   position: absolute;

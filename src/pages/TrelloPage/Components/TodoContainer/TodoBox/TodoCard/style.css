@@ -11,6 +11,12 @@
   border-radius: 5px;
   position: relative;
   white-space: normal;
+  transition: 0.3s;
+}
+
+.todoCard:hover {
+  background-color: #e3e4e6;
+  border: 0.5px solid #e3e4e6;
 }
 
 .todoCard .todoCardDeleteBtn {
