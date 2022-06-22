@@ -4,9 +4,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEmail } from "../../store";
+import { changeEmail, changeToken } from "../../store";
 
 const LoinPage = () => {
+  let reduxState = useSelector((state) => {
+    return state;
+  });
+
+  console.log(reduxState);
   const dispatch = useDispatch();
 
   const [loginForm, setLoginForm] = useState({
@@ -33,6 +38,8 @@ const LoinPage = () => {
         const user = data.user;
         const email = user.email;
         dispatch(changeEmail(email));
+        dispatch(changeToken(accessToken));
+        console.log(reduxState);
         // console.log(res.data);
         // console.log(accessToken);
       })
