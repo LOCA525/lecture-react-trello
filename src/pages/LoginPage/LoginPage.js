@@ -3,8 +3,12 @@ import Logo from "../../img/logo.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { changeEmail } from "../../store";
 
 const LoinPage = () => {
+  const dispatch = useDispatch();
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -28,10 +32,9 @@ const LoinPage = () => {
         const accessToken = data.accessToken;
         const user = data.user;
         const email = user.email;
-
-        console.log(res.data);
-        console.log(accessToken);
-        console.log(email);
+        dispatch(changeEmail(email));
+        // console.log(res.data);
+        // console.log(accessToken);
       })
       .catch((err) => {
         console.log(err);
