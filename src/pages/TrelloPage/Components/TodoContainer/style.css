@@ -8,7 +8,40 @@
   white-space: nowrap;
 }
 
-.TodoContainer .addTodoBoxBtn {
+.addTodoForm {
+  vertical-align: top;
+  display: inline-block;
+  width: 300px;
+  height: 70px;
+  background-color: #e3e4e6;
+  border-radius: 5px;
+  padding: 18px;
+}
+
+.addTodoForm .addTodoBoxInput {
+  text-align: center;
+  white-space: nowrap;
+  overflow-x: auto;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 35px;
+  color: #40506c;
+  border-radius: 10px;
+}
+
+.addTodoForm .enterBtn {
+  vertical-align: top;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #40506c;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 30px;
+}
+.enterBtn:hover {
+  opacity: 50%;
+}
+.addTodoBoxBtn {
   cursor: pointer;
   width: 300px;
   height: 40px;

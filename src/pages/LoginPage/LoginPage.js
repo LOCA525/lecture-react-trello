@@ -40,8 +40,6 @@ const LoinPage = () => {
         dispatch(changeEmail(email));
         dispatch(changeToken(accessToken));
         console.log(reduxState);
-        // console.log(res.data);
-        // console.log(accessToken);
       })
       .catch((err) => {
         console.log(err);

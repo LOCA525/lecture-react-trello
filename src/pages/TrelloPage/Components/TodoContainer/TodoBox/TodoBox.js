@@ -1,26 +1,21 @@
 import TodoCard from "./TodoCard/TodoCard";
 import "./style.css";
-const TodoBox = () => {
+const TodoBox = ({ item }) => {
   return (
     <div className="TodoBox">
       <div className="todoTitle">
-        todoTitle
+        {item.title}
         <button className="todoBoxDeleteBtn">🅧</button>
       </div>
 
       <ul className="todos">
         <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
-        <TodoCard />
       </ul>
-      <button className="todoBoxAddBtn">+Add Cart</button>
+
+      <form typeof="submit">
+        <input className=""></input>
+        <button className="todoBoxAddBtn">+Add Cart</button>
+      </form>
     </div>
   );
 };

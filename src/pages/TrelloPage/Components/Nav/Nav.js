@@ -4,6 +4,7 @@ const Nav = () => {
   let userEmail = useSelector((state) => {
     return state.email;
   });
+
   return (
     <div className="Nav">
       <div className="title">
