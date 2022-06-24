@@ -6,14 +6,32 @@ import { useSelector } from "react-redux";
 
 const TodoContainer = ({ TitleValue, setTitleValue, TitleData, setTitleData, id }) => {
   const accessToken = useSelector((state) => state.token);
-  console.log(accessToken);
   const [toggle, setToggle] = useState(true);
+  const [addList, setAddList] = useState({
+    headers: { Authorization: "Bearer " + accessToken },
+  });
+  console.log(addList);
+
   const handleAddSubmit = (e) => {
     e.preventDefault();
     setTitleValue(TitleValue);
-    setTitleData([...TitleData, { id: id.current, title: TitleValue }]);
+    const data = {
+      title: TitleValue,
+      listId: id.current,
+      pos: id.current,
+    };
+    setTitleData([...TitleData, data]);
     id.current = id.current + 1;
-    console.log(TitleData);
+    setAddList({ ...addList, data });
+    axios
+      .post("http://localhost:3010/lists", addList)
+      .then((res) => {
+        console.log("포스트성공!", res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(addList);
+      });
     setTitleValue("");
     setToggle(!toggle);
   };
