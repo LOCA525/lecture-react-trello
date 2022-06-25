@@ -1,0 +1,61 @@
+.container {
+  margin: 0 auto;
+}
+
+.container .title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 30px;
+  text-align: center;
+  color: #5e6c84;
+  letter-spacing: -0.01em;
+}
+
+.container .boardBox {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #ffffff;
+  max-width: 800px;
+  border-radius: 3px;
+  padding: 25px 40px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boardItem {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #5e6c84;
+  width: 200px;
+  height: 100px;
+  color: #fff;
+  padding: 5px;
+}
+
+.navyLine {
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background-color: #1d232e;
+  margin-bottom: 10px;
+}
+
+.addBoardBtn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #5e6c84;
+  opacity: 50%;
+  width: 200px;
+  height: 100px;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  font-size: 40px;
+}

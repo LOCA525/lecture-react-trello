@@ -26,20 +26,22 @@ const LoinPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log("loginForm은", loginForm);
     axios
       .post("http://localhost:3010/login", loginForm)
       .then((res) => {
         console.log("포스트성공", res);
         if (res.status === 200) {
-          navigate("/trello");
+          navigate("/board");
         }
         const data = res.data;
         const accessToken = data.accessToken;
+        dispatch(changeToken(accessToken));
         const user = data.user;
         const email = user.email;
         dispatch(changeEmail(email));
-        dispatch(changeToken(accessToken));
         console.log(reduxState);
+        console.log(accessToken);
       })
       .catch((err) => {
         console.log(err);

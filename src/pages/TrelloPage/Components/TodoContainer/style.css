@@ -28,7 +28,13 @@
   color: #40506c;
   border-radius: 10px;
 }
-
+.mainBoard {
+  padding: 20px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 30px;
+  background-color: #40506c;
+}
 .addTodoForm .enterBtn {
   vertical-align: top;
   padding: 2px;
