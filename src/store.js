@@ -20,12 +20,24 @@ let token = createSlice({
   },
 });
 
+let boardData = createSlice({
+  name: "boardData",
+  initialState: "",
+  reducers: {
+    changeBoardData(state, a) {
+      return a.payload;
+    },
+  },
+});
+
 export default configureStore({
   reducer: {
     email: email.reducer,
     token: token.reducer,
+    boardData: boardData.reducer,
   },
 });
 
 export let { changeEmail } = email.actions;
 export let { changeToken } = token.actions;
+export let { changeBoardData } = boardData.actions;

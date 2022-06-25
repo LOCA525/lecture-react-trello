@@ -1,10 +1,36 @@
 import Logo from "../../img/logo.svg";
 import "./style.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import BoardItem from "./Components/BoardItem";
+import axios from "axios";
+import { useState } from "react";
+import { changeBoardData } from "../../store";
+
 const BoardPage = () => {
+  const dispatch = useDispatch();
   let userEmail = useSelector((state) => {
     return state.email;
   });
+  let accessToken = useSelector((state) => {
+    return state.token;
+  });
+  let boardData = useSelector((state) => {
+    return state.boardData;
+  });
+
+  axios
+    .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
+    .then((res) => {
+      console.log("가져오기성공", res);
+      if (res.status === 200) {
+        const data = res.data;
+        console.log(data);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   return (
     <div>
       <div className="container">
@@ -13,10 +39,12 @@ const BoardPage = () => {
           <h2 className="title">{userEmail}'s WORKSPACES</h2>
         </div>
         <div className="boardBox">
-          <div className="boardItem">
-            <div className="navyLine"></div>
-            <div className="boardTitle">예시를 든 보드의 제목 입니다.</div>
-          </div>
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
+          <BoardItem />
           <button className="addBoardBtn">
             <div>⊕</div>
           </button>
