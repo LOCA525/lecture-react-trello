@@ -44,7 +44,8 @@ const BoardPage = () => {
         </div>
         <div className="boardBox">
           {boardData.map((item) => {
-            return <BoardItem item={item} />;
+            console.log("보드데이터", boardData);
+            return <BoardItem item={item} key={item.id} />;
           })}
 
           <button className="addBoardBtn">
