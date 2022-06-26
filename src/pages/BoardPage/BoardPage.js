@@ -3,33 +3,37 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import BoardItem from "./Components/BoardItem";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { changeBoardData } from "../../store";
 
 const BoardPage = () => {
-  const dispatch = useDispatch();
+  let boardData = useSelector((state) => {
+    return state.boardData;
+  });
   let userEmail = useSelector((state) => {
     return state.email;
   });
   let accessToken = useSelector((state) => {
     return state.token;
   });
-  let boardData = useSelector((state) => {
-    return state.boardData;
-  });
 
-  axios
-    .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
-    .then((res) => {
-      console.log("가져오기성공", res);
-      if (res.status === 200) {
-        const data = res.data;
-        console.log(data);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((res) => {
+        console.log("가져오기성공", res);
+        if (res.status === 200) {
+          const data = res.data;
+          const dataList = data.list;
+          dispatch(changeBoardData(dataList));
+          console.log("보드데이터", boardData);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div>
@@ -39,12 +43,10 @@ const BoardPage = () => {
           <h2 className="title">{userEmail}'s WORKSPACES</h2>
         </div>
         <div className="boardBox">
-          <BoardItem />
-          <BoardItem />
-          <BoardItem />
-          <BoardItem />
-          <BoardItem />
-          <BoardItem />
+          {boardData.map((item) => {
+            return <BoardItem item={item} />;
+          })}
+
           <button className="addBoardBtn">
             <div>⊕</div>
           </button>

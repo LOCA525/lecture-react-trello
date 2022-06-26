@@ -4,9 +4,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEmail, changeToken } from "../../store";
+import { changeEmail, changeToken, changeBoardData } from "../../store";
 
 const LoinPage = () => {
+  let accessToken = useSelector((state) => {
+    return state.token;
+  });
+  let boardData = useSelector((state) => {
+    return state.boardData;
+  });
   let reduxState = useSelector((state) => {
     return state;
   });
