@@ -1,4 +1,5 @@
 const BoardItem = (item) => {
+  console.log(item.title);
   return (
     <div className="boardItem">
       <div className="navyLine"></div>
