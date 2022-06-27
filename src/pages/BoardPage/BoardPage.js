@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import { changeBoardData } from "../../store";
 
 const BoardPage = () => {
+  const dispatch = useDispatch();
+  const [toggle, setToggle] = useState(true);
+  const [boardTitle, setBoardTitle] = useState({ title: "" });
   let boardData = useSelector((state) => {
     return state.boardData;
   });
@@ -16,8 +19,27 @@ const BoardPage = () => {
   let accessToken = useSelector((state) => {
     return state.token;
   });
+  const handleAddClick = (e) => {
+    setToggle(!toggle);
+  };
+  const onChange = (e) => {
+    setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
+    console.log(boardTitle);
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(boardTitle);
+    console.log(accessToken);
+    axios
+      .post("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` }, boardTitle })
+      .then((res) => {
+        console.log("포스트성공", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -48,9 +70,22 @@ const BoardPage = () => {
             return <BoardItem item={item} key={item.id} />;
           })}
 
-          <button className="addBoardBtn">
-            <div>⊕</div>
-          </button>
+          {toggle === true ? (
+            <button className="addBoardBtn" onClick={handleAddClick}>
+              <div>⊕</div>
+            </button>
+          ) : (
+            <div className="boardItem">
+              <div className="navyLine"></div>
+              <form typeof="submit" className="boardAddSubmit" onSubmit={onSubmit}>
+                <input className="boardAddInput" onChange={onChange} name="title" value={boardTitle.title}></input>
+                <button type="submit" className="enterBtn">
+                  Enter!
+                </button>
+              </form>
+              <div className="boardTitle"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>

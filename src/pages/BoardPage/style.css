@@ -35,7 +35,9 @@
   color: #fff;
   padding: 5px;
 }
-
+.boardItem:hover {
+  border: #1d232e solid 2px;
+}
 .navyLine {
   color: #fff;
   text-align: center;
@@ -58,4 +60,26 @@
   padding: 5px;
   text-align: center;
   font-size: 40px;
+  cursor: pointer;
+}
+
+.addBoardBtn:hover {
+  border: #1d232e solid 2px;
+}
+
+.boardAddSubmit {
+  display: flex;
+}
+.boardAddInput {
+  width: 140px;
+  font-size: 20px;
+}
+.enterBtn {
+  vertical-align: top;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #40506c;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 30px;
 }
