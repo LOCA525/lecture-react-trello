@@ -74,7 +74,17 @@ const BoardPage = () => {
         </div>
         <div className="boardBox">
           {boardData.map((item) => {
-            return <BoardItem item={item} key={item.id} render={render} setRender={setRender} />;
+            return (
+              <BoardItem
+                item={item}
+                key={item.id}
+                render={render}
+                setRender={setRender}
+                onChange={onChange}
+                boardTitle={boardTitle}
+                setBoardTitle={setBoardTitle}
+              />
+            );
           })}
 
           {toggle === true ? (
@@ -85,7 +95,13 @@ const BoardPage = () => {
             <div className="boardItem">
               <div className="navyLine"></div>
               <form typeof="submit" className="boardAddSubmit" onSubmit={onSubmit}>
-                <input className="boardAddInput" onChange={onChange} name="title" value={boardTitle.title}></input>
+                <input
+                  className="boardAddInput"
+                  onChange={onChange}
+                  name="title"
+                  value={boardTitle.title}
+                  autoFocus
+                ></input>
                 <button type="submit" className="enterBtn">
                   Enter!
                 </button>

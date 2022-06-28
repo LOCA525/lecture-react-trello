@@ -7,22 +7,25 @@
   margin-bottom: 20px;
   font-size: 30px;
   text-align: center;
-  color: #5e6c84;
+  color: #1d232e;
   letter-spacing: -0.01em;
 }
 
 .container .boardBox {
-  height: 100%;
+  height: calc(100vh - 260px);
+  overflow: scroll;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
   background-color: #ffffff;
-  max-width: 800px;
+  max-width: 550px;
   border-radius: 3px;
-  padding: 25px 40px;
+  padding: 25px 50px;
   box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 20px;
 }
 
 .boardItem {
@@ -33,10 +36,15 @@
   width: 200px;
   height: 100px;
   color: #fff;
-  padding: 5px;
+  outline: 4px solid transparent;
+  transition: 0.2s;
+  position: relative;
 }
 .boardItem:hover {
-  border: #1d232e solid 2px;
+  outline: #40506c solid 4px;
+}
+.boardItem:hover button {
+  display: block;
 }
 .navyLine {
   color: #fff;
@@ -46,6 +54,9 @@
   line-height: 30px;
   background-color: #1d232e;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: end;
+  border-radius: 5px;
 }
 
 .addBoardBtn {
@@ -69,9 +80,10 @@
 
 .boardAddSubmit {
   display: flex;
+  justify-content: center;
 }
 .boardAddInput {
-  width: 140px;
+  width: 120px;
   font-size: 20px;
 }
 .enterBtn {
@@ -87,4 +99,26 @@
 .deleteBtn {
   cursor: pointer;
   color: #fff;
+  margin-right: 5px;
+  display: none;
+}
+
+.editBtn {
+  cursor: pointer;
+  color: #fff;
+  margin-right: 5px;
+  display: none;
+}
+
+.boardTitle {
+  margin-left: 10px;
+  font-size: 17px;
+  overflow: auto;
+}
+
+.createdAtData {
+  position: absolute;
+  font-size: 10px;
+  bottom: 5px;
+  right: 5px;
 }
