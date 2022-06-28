@@ -60,7 +60,7 @@ const BoardPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [toggle]);
+  }, [toggle, render]);
 
   return (
     <div>
