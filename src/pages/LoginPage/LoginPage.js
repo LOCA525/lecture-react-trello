@@ -51,6 +51,7 @@ const LoinPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        alert("아이디와 비밀번호를 확인해주세요. 테스트ID: test@test.com PW:123123 입니다");
       });
   };
 

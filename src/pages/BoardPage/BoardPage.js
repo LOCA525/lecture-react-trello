@@ -29,7 +29,6 @@ const BoardPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     setToggle(!toggle);
-
     axios
       .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
@@ -43,6 +42,8 @@ const BoardPage = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    console.log(boardTitle);
   };
 
   useEffect(() => {
