@@ -5,9 +5,10 @@ import BoardItem from "./Components/BoardItem";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { changeBoardData } from "../../store";
-
+import { GoPerson } from "react-icons/go";
 const BoardPage = () => {
   const dispatch = useDispatch();
+  const [render, setRender] = useState(true);
   const [toggle, setToggle] = useState(true);
   const [boardTitle, setBoardTitle] = useState({ title: "" });
   let boardData = useSelector((state) => {
@@ -24,16 +25,20 @@ const BoardPage = () => {
   };
   const onChange = (e) => {
     setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
-    console.log(boardTitle);
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(boardTitle);
-    console.log(accessToken);
+    setToggle(!toggle);
+
     axios
-      .post("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` }, boardTitle })
+      .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
         console.log("포스트성공", res);
+        const data = res.data;
+        const NewBoardData = data.item;
+
+        console.log("새보드데이터", NewBoardData);
+        setBoardTitle("");
       })
       .catch((err) => {
         console.log(err);
@@ -55,19 +60,21 @@ const BoardPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [toggle]);
 
   return (
     <div>
       <div className="container">
         <img className="logo" src={Logo} alt="logo!" />
         <div>
-          <h2 className="title">{userEmail}'s WORKSPACES</h2>
+          <h2 className="title">
+            <GoPerson />
+            {userEmail}'s WORKSPACES
+          </h2>
         </div>
         <div className="boardBox">
           {boardData.map((item) => {
-            console.log("보드데이터", boardData);
-            return <BoardItem item={item} key={item.id} />;
+            return <BoardItem item={item} key={item.id} render={render} setRender={setRender} />;
           })}
 
           {toggle === true ? (
