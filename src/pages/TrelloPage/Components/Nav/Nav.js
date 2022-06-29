@@ -1,11 +1,10 @@
 import "./style.css";
 import { useSelector } from "react-redux";
 
-const Nav = ({ titleBar, mainBoard }) => {
+const Nav = ({ boardData }) => {
   let userEmail = useSelector((state) => {
     return state.email;
   });
-
   return (
     <div className="Nav">
       <div className="title">

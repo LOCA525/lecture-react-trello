@@ -2,9 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { changeBoardData } from "../../../store";
 
 const BoardItem = (props) => {
+  const navigate = useNavigate();
   ///프롭스부분 고장 ..
   const [editToggle, setEditToggle] = useState(true);
   let accessToken = useSelector((state) => {
@@ -51,11 +53,31 @@ const BoardItem = (props) => {
         console.log(err);
       });
   };
+  const goListClick = () => {
+    axios
+      .get(`http://localhost:3010/boards/${props.item.id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((res) => {
+        console.log("리스트이동성공", res);
+        if (res.status === 200) {
+          console.log(res.data.item.id);
+          const boardId = res.data.item.id;
+          navigate(`/trello/${boardId}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="boardItem">
       <div className="navyLine">
-        <button className="editBtn" onClick={handleEditClick}>
+        <button
+          className="editBtn"
+          onClick={() => {
+            setEditToggle(!editToggle);
+          }}
+        >
           <GoPencil />
         </button>
         <button className="deleteBtn" onClick={onRemove}>
@@ -63,10 +85,12 @@ const BoardItem = (props) => {
         </button>
       </div>
       {editToggle === true ? (
-        <>
-          <div className="boardTitle">{props.item.title}</div>
+        <div>
+          <div className="boardTitle" onClick={goListClick}>
+            {props.item.title}
+          </div>
           <div className="createdAtData">{props.item.createdAt}</div>
-        </>
+        </div>
       ) : (
         <form typeof="submit" className="boardAddSubmit" onSubmit={editSubmit}>
           <input

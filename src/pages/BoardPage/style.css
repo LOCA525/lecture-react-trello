@@ -29,7 +29,6 @@
 }
 
 .boardItem {
-  cursor: pointer;
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -58,6 +57,7 @@
   display: flex;
   justify-content: end;
   border-radius: 5px;
+  position: relative;
 }
 
 .addBoardBtn {
@@ -114,6 +114,8 @@
 }
 
 .boardTitle {
+  cursor: pointer;
+  height: 70px;
   margin-left: 10px;
   font-size: 17px;
   overflow: auto;

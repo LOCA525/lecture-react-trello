@@ -1,25 +1,48 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import TodoBox from "./TodoBox/TodoBox";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeBoardData } from "../../../../store";
 
-const TodoContainer = ({ TitleValue, setTitleValue, TitleData, setTitleData, id }) => {
+const TodoContainer = ({ boardData, id, TitleValue, setTitleValue, TitleData, setTitleData }) => {
+  const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.token);
+  const [render, setRender] = useState(true);
   const [toggle, setToggle] = useState(true);
+
+  const rendering = () => {
+    setRender(!render);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((res) => {
+        console.log("리스트가져오기성공", res);
+        if (res.status === 200) {
+          const data = res.data;
+          const dataItem = data.item;
+          const dataList = dataItem.lists;
+          dispatch(changeBoardData(dataList));
+          console.log("보드데이터", boardData);
+        }
+      })
+      .catch((err) => {});
+  }, [render]);
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
     setTitleValue(TitleValue);
     const data = {
       title: TitleValue,
-      boardId: id.current,
-      pos: id.current,
+      boardId: id,
+      pos: id,
     };
     setTitleData([...TitleData, data]);
 
     axios
-      .post("http://localhost:3010/lists", { data, headers: { Authorization: `Bearer ${accessToken}` } })
+      .post("http://localhost:3010/lists", data, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
         console.log("포스트성공!", res);
       })
@@ -28,17 +51,31 @@ const TodoContainer = ({ TitleValue, setTitleValue, TitleData, setTitleData, id 
       });
     setTitleValue("");
     setToggle(!toggle);
-    id.current = id.current + 1;
+    setRender(!render);
   };
 
   const handleChange = (e) => {
     setTitleValue(e.target.value);
   };
+
   return (
     <>
       <div className="TodoContainer">
-        {TitleData.map((item) => {
-          return <TodoBox item={item} ket={item.id} />;
+        {boardData.map((item) => {
+          return (
+            <TodoBox
+              item={item}
+              key={item.id}
+              rendering={rendering}
+              TitleValue={TitleValue}
+              handleChange={handleChange}
+              TitleData={TitleData}
+              setTitleValue={setTitleData}
+              setTitleData={setTitleData}
+              id={id}
+              boardData={boardData}
+            />
+          );
         })}
 
         {toggle === true ? (
