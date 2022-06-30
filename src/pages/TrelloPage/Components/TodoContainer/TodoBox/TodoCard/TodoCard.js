@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeBoardData } from "../../../../../../store";
 import "./style.css";
 
-const TodoCard = () => {
+const TodoCard = ({ item }) => {
   return (
     <li className="todoCard">
       <button className="todoCardDeleteBtn">🅧</button>

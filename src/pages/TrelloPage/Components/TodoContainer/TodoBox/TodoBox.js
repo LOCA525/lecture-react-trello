@@ -23,7 +23,7 @@ const TodoBox = ({
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
-
+  const [todoData, setTodoData] = useState({ title: "", listId: item.id });
   useEffect(() => {
     axios
       .get(`http://localhost:3010/cards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -83,9 +83,13 @@ const TodoBox = ({
       });
   };
 
-  const todoChange = () => {};
+  const todoChange = (e) => {
+    setTodoValue(e.target.value);
+    console.log(todoValue);
+  };
   const todoSubmit = (e) => {
     e.preventDefault();
+    setTodoData();
   };
   return (
     <div className="TodoBox">
@@ -108,10 +112,10 @@ const TodoBox = ({
         </form>
       )}
       <ul className="todos">
-        {/* {cardList.map(() => {
+        {item.cards.map(() => {
           console.log(item);
-          return <TodoCard />;
-        })} */}
+          return <TodoCard itme={item} />;
+        })}
       </ul>
 
       {cardToggle === true ? (
