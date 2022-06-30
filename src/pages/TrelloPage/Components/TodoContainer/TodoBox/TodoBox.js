@@ -23,7 +23,8 @@ const TodoBox = ({
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
-  const [todoData, setTodoData] = useState({ title: "", listId: item.id });
+  const [itemCard, setItemCard] = useState(item.cards);
+  const [todoData, setTodoData] = useState([]);
   useEffect(() => {
     axios
       .get(`http://localhost:3010/cards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -32,11 +33,16 @@ const TodoBox = ({
         if (res.status === 200) {
           const data = res.data;
           const cardData = data.item;
-
+          console.log("res.data", res.data);
           console.log("item:", item);
           console.log("item.cards:", item.cards);
           console.log("cardData:", cardData);
+          setItemCard([...itemCard, cardData]);
+
+          console.log("itemCard:", itemCard);
+          // dispatch(changeBoardData(...boardData.cards, data));
           console.log("boardData:", boardData);
+          console.log(boardData.cards);
         }
       })
       .catch((err) => {
@@ -89,7 +95,21 @@ const TodoBox = ({
   };
   const todoSubmit = (e) => {
     e.preventDefault();
-    setTodoData();
+    const data = {
+      title: todoValue,
+      listId: item.id,
+    };
+    setCardToggle(!cardToggle);
+    setTodoData([...todoData, data]);
+    console.log(todoData);
+    axios
+      .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((res) => {
+        console.log("카드추가성공!", res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="TodoBox">
@@ -112,10 +132,10 @@ const TodoBox = ({
         </form>
       )}
       <ul className="todos">
-        {item.cards.map(() => {
+        {/* {item.cards.map(() => {
           console.log(item);
           return <TodoCard itme={item} />;
-        })}
+        })} */}
       </ul>
 
       {cardToggle === true ? (
