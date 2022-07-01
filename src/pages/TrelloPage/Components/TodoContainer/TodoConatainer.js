@@ -97,7 +97,7 @@ const TodoContainer = ({
           </button>
         ) : (
           <form typeof="submit" className="addTodoForm" onSubmit={handleAddSubmit}>
-            <input className="addTodoBoxInput" onChange={handleChange} value={TitleValue}></input>
+            <input className="addTodoBoxInput" onChange={handleChange} value={TitleValue} autoFocus></input>
             <button type="submit" className="enterBtn">
               Enter!
             </button>

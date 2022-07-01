@@ -26,7 +26,7 @@ const TodoBox = ({
   const [todoData, setTodoData] = useState([]);
   const cardData = useSelector((state) => state.cardData);
   console.log("카드쪽boardData:", boardData);
-  console.log("카드쪽itme:", item.cards);
+  console.log("카드쪽item:", item.cards);
   // useEffect(() => {
   //   axios
   //     .get(`http://localhost:3010/cards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -106,6 +106,7 @@ const TodoBox = ({
         console.log(err);
       });
     setCardToggle(!cardToggle);
+    setTodoValue("");
   };
   return (
     <div className="TodoBox">
@@ -130,7 +131,18 @@ const TodoBox = ({
       <ul className="todos">
         {item.cards.map((item) => {
           console.log(item);
-          return <TodoCard item={item} />;
+          return (
+            <TodoCard
+              setTodoValue={setTodoValue}
+              setTodoData={setTodoData}
+              todoData={todoData}
+              todoChange={todoChange}
+              todoValue={todoValue}
+              item={item}
+              rendering={rendering}
+              accessToken={accessToken}
+            />
+          );
         })}
       </ul>
 
@@ -146,7 +158,7 @@ const TodoBox = ({
         </button>
       ) : (
         <form typeof="submit" className="editTodoForm" onSubmit={todoSubmit}>
-          <input className="addTodoBoxInput" onChange={todoChange} value={todoValue}></input>
+          <input className="addTodoBoxInput" onChange={todoChange} value={todoValue} autoFocus></input>
           <button type="submit" className="enterBtn">
             Enter!
           </button>

@@ -12,9 +12,9 @@ function App() {
         <Route path="/Board" element={<BoardPage />} />
         <Route path="/trello/:id" element={<TrelloPage />} />
       </Routes>
-      <Link to="/login">로그인!!!</Link>
+      {/* <Link to="/login">로그인!!!</Link>
       <Link to="/Board">보드!!!</Link>
-      <Link to="/trello">트렐로!!!</Link>
+      <Link to="/trello">트렐로!!!</Link> */}
     </>
   );
 }
