@@ -30,14 +30,26 @@ let boardData = createSlice({
   },
 });
 
+let cardData = createSlice({
+  name: "cardData",
+  initialState: [],
+  reducers: {
+    changeCardData(state, a) {
+      return a.payload;
+    },
+  },
+});
+
 export default configureStore({
   reducer: {
     email: email.reducer,
     token: token.reducer,
     boardData: boardData.reducer,
+    cardData: cardData.reducer,
   },
 });
 
 export let { changeEmail } = email.actions;
 export let { changeToken } = token.actions;
 export let { changeBoardData } = boardData.actions;
+export let { changeCardData } = cardData.actions;

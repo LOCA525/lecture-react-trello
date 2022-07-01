@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { changeBoardData } from "../../../store";
 
 const BoardItem = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   ///프롭스부분 고장 ..
   const [editToggle, setEditToggle] = useState(true);
@@ -61,7 +62,11 @@ const BoardItem = (props) => {
         if (res.status === 200) {
           console.log(res.data.item.id);
           const boardId = res.data.item.id;
+          const data = res.data.item.lists;
+          console.log(data);
+          dispatch(changeBoardData(data));
           navigate(`/trello/${boardId}`);
+          console.log("리스트이동성공후보드데이터:", boardData);
         }
       })
       .catch((err) => {

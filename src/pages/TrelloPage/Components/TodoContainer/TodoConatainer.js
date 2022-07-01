@@ -5,16 +5,23 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { changeBoardData } from "../../../../store";
 
-const TodoContainer = ({ boardData, id, TitleValue, setTitleValue, TitleData, setTitleData }) => {
+const TodoContainer = ({
+  render,
+  setRender,
+  rendering,
+  boardData,
+  id,
+  TitleValue,
+  setTitleValue,
+  TitleData,
+  setTitleData,
+}) => {
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.token);
-  const [render, setRender] = useState(true);
+
   const [toggle, setToggle] = useState(true);
 
-  const rendering = () => {
-    setRender(!render);
-  };
-
+  console.log("보드데이터", boardData);
   useEffect(() => {
     axios
       .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -25,10 +32,11 @@ const TodoContainer = ({ boardData, id, TitleValue, setTitleValue, TitleData, se
           const dataItem = data.item;
           const dataList = dataItem.lists;
           dispatch(changeBoardData(dataList));
-          console.log("보드데이터", boardData);
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   }, [render]);
 
   const handleAddSubmit = (e) => {

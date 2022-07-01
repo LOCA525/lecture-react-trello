@@ -8,7 +8,7 @@ const TodoCard = ({ item }) => {
   return (
     <li className="todoCard">
       <button className="todoCardDeleteBtn">🅧</button>
-      TodoCard
+      {item.title}
     </li>
   );
 };
