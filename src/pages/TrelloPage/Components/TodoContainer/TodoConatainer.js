@@ -96,8 +96,16 @@ const TodoContainer = ({
             +Add another list
           </button>
         ) : (
-          <form typeof="submit" className="addTodoForm" onSubmit={handleAddSubmit}>
-            <input className="addTodoBoxInput" onChange={handleChange} value={TitleValue} autoFocus></input>
+          <form className="addTodoForm" onSubmit={handleAddSubmit}>
+            <input
+              className="addTodoBoxInput"
+              onChange={handleChange}
+              onBlur={() => {
+                setToggle(true);
+              }}
+              value={TitleValue}
+              autoFocus
+            ></input>
             <button type="submit" className="enterBtn">
               Enter!
             </button>

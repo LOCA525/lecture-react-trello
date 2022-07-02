@@ -103,6 +103,9 @@ const BoardItem = (props) => {
             onChange={props.onChange}
             name="title"
             value={boardData.title}
+            onBlur={() => {
+              setEditToggle(true);
+            }}
             autoFocus
           ></input>
           <button type="submit" className="enterBtn">

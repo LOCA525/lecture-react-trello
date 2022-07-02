@@ -91,6 +91,7 @@ const TodoBox = ({
     const data = {
       title: todoValue,
       listId: item.id,
+      pos: 70000,
     };
 
     setTodoData([...todoData, data]);
@@ -122,7 +123,14 @@ const TodoBox = ({
         </div>
       ) : (
         <form typeof="submit" className="editTodoForm" onSubmit={handleEditSubmit}>
-          <input className="addTodoBoxInput" onChange={handleChange} value={TitleValue}></input>
+          <input
+            className="addTodoBoxInput"
+            onBlur={() => {
+              setEditToggle(true);
+            }}
+            onChange={handleChange}
+            value={TitleValue}
+          ></input>
           <button type="submit" className="enterBtn">
             Enter!
           </button>
@@ -158,7 +166,15 @@ const TodoBox = ({
         </button>
       ) : (
         <form typeof="submit" className="editTodoForm" onSubmit={todoSubmit}>
-          <input className="addTodoBoxInput" onChange={todoChange} value={todoValue} autoFocus></input>
+          <input
+            className="addTodoBoxInput"
+            onChange={todoChange}
+            onBlur={() => {
+              setEditToggle(true);
+            }}
+            value={todoValue}
+            autoFocus
+          ></input>
           <button type="submit" className="enterBtn">
             Enter!
           </button>

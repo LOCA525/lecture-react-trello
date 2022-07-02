@@ -58,7 +58,15 @@ const TodoCard = ({ todoData, setTodoData, setTodoValue, item, accessToken, rend
     </li>
   ) : (
     <form typeof="submit" className="editTodoForm" onSubmit={todoEditSubmit}>
-      <input className="addTodoBoxInput" onChange={todoChange} value={todoValue} autoFocus></input>
+      <input
+        className="addTodoBoxInput"
+        onChange={todoChange}
+        value={todoValue}
+        onBlur={() => {
+          setEditToggle2(true);
+        }}
+        autoFocus
+      ></input>
       <button type="submit" className="enterBtn">
         Enter!
       </button>

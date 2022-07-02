@@ -24,6 +24,7 @@ const BoardPage = () => {
     setToggle(!toggle);
   };
   const onChange = (e) => {
+    console.log("e");
     setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
@@ -99,10 +100,13 @@ const BoardPage = () => {
                 <input
                   className="boardAddInput"
                   onChange={onChange}
+                  onBlur={() => {
+                    setToggle(true);
+                  }}
                   name="title"
                   value={boardTitle.title}
                   autoFocus
-                ></input>
+                />
                 <button type="submit" className="enterBtn">
                   Enter!
                 </button>
