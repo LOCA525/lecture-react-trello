@@ -107,7 +107,13 @@ const BoardPage = () => {
                   value={boardTitle.title}
                   autoFocus
                 />
-                <button type="submit" className="enterBtn">
+                <button
+                  type="submit"
+                  className="enterBtn"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                  }}
+                >
                   Enter!
                 </button>
               </form>

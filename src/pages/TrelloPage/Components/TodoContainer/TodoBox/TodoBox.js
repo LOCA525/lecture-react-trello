@@ -170,12 +170,18 @@ const TodoBox = ({
             className="addTodoBoxInput"
             onChange={todoChange}
             onBlur={() => {
-              setEditToggle(true);
+              setCardToggle(true);
             }}
             value={todoValue}
             autoFocus
           ></input>
-          <button type="submit" className="enterBtn">
+          <button
+            type="submit"
+            className="enterBtn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+            }}
+          >
             Enter!
           </button>
         </form>

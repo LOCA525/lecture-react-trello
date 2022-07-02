@@ -96,7 +96,7 @@ const TodoContainer = ({
             +Add another list
           </button>
         ) : (
-          <form className="addTodoForm" onSubmit={handleAddSubmit}>
+          <form typeof="submit" className="addTodoForm" onSubmit={handleAddSubmit}>
             <input
               className="addTodoBoxInput"
               onChange={handleChange}
@@ -106,7 +106,13 @@ const TodoContainer = ({
               value={TitleValue}
               autoFocus
             ></input>
-            <button type="submit" className="enterBtn">
+            <button
+              typeof="submit"
+              className="enterBtn"
+              onMouseDown={(e) => {
+                e.preventDefault();
+              }}
+            >
               Enter!
             </button>
           </form>

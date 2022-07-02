@@ -67,7 +67,13 @@ const TodoCard = ({ todoData, setTodoData, setTodoValue, item, accessToken, rend
         }}
         autoFocus
       ></input>
-      <button type="submit" className="enterBtn">
+      <button
+        type="submit"
+        className="enterBtn"
+        onMouseDown={(e) => {
+          e.preventDefault();
+        }}
+      >
         Enter!
       </button>
     </form>

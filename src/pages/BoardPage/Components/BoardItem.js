@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { changeBoardData } from "../../../store";
 const BoardItem = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   ///프롭스부분 고장 ..
   const [editToggle, setEditToggle] = useState(true);
   let accessToken = useSelector((state) => {
@@ -107,8 +108,14 @@ const BoardItem = (props) => {
               setEditToggle(true);
             }}
             autoFocus
-          ></input>
-          <button type="submit" className="enterBtn">
+          />
+          <button
+            type="submit"
+            className="enterBtn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+            }}
+          >
             Enter!
           </button>
         </form>
