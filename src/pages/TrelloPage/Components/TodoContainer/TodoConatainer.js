@@ -17,7 +17,7 @@ const TodoContainer = ({
   setTitleData,
 }) => {
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.token);
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
   const [toggle, setToggle] = useState(true);
 

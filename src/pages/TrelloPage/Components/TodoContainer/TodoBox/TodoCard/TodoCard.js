@@ -5,7 +5,9 @@ import { changeBoardData } from "../../../../../../store";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import "./style.css";
 
-const TodoCard = ({ todoData, setTodoData, setTodoValue, item, accessToken, rendering, todoChange, todoValue }) => {
+const TodoCard = ({ todoData, setTodoData, setTodoValue, item, rendering, todoChange, todoValue }) => {
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
   const [editToggle2, setEditToggle2] = useState(true);
   const todoDeleteClick = () => {
     axios

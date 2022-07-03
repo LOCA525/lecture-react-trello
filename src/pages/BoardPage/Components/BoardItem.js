@@ -22,6 +22,8 @@ const BoardItem = (props) => {
     setEditToggle(!editToggle);
   };
   const onRemove = () => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
     axios
       .delete(`http://localhost:3010/boards/${props.item.id}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
@@ -35,6 +37,8 @@ const BoardItem = (props) => {
       });
   };
   const editSubmit = (e) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
     e.preventDefault();
     axios
       .put(`http://localhost:3010/boards/${props.item.id}`, props.boardTitle, {
@@ -56,6 +60,8 @@ const BoardItem = (props) => {
       });
   };
   const goListClick = () => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
     axios
       .get(`http://localhost:3010/boards/${props.item.id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {

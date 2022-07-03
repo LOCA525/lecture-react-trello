@@ -19,7 +19,7 @@ const TodoBox = ({
   item,
 }) => {
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.token);
+  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
@@ -131,7 +131,13 @@ const TodoBox = ({
             onChange={handleChange}
             value={TitleValue}
           ></input>
-          <button type="submit" className="enterBtn">
+          <button
+            type="submit"
+            className="enterBtn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+            }}
+          >
             Enter!
           </button>
         </form>

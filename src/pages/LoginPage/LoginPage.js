@@ -10,6 +10,7 @@ const LoinPage = () => {
   let accessToken = useSelector((state) => {
     return state.token;
   });
+
   let boardData = useSelector((state) => {
     return state.boardData;
   });
@@ -48,6 +49,7 @@ const LoinPage = () => {
         dispatch(changeEmail(email));
         console.log(reduxState);
         console.log(accessToken);
+        localStorage.setItem("accessToken", JSON.stringify(accessToken));
       })
       .catch((err) => {
         console.log(err);

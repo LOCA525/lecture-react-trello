@@ -28,6 +28,8 @@ const BoardPage = () => {
     setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
     e.preventDefault();
     setToggle(!toggle);
     axios
@@ -48,6 +50,8 @@ const BoardPage = () => {
   };
 
   useEffect(() => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+
     axios
       .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
