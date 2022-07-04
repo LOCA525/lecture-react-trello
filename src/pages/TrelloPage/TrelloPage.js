@@ -2,11 +2,9 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { changeBoardData } from "../../store";
-import Nav from "./Components/Nav/Nav";
-import TodoBox from "./Components/TodoContainer/TodoBox/TodoBox";
-import TodoCard from "./Components/TodoContainer/TodoBox/TodoCard/TodoCard";
-import TodoContainer from "./Components/TodoContainer/TodoConatainer";
+import Nav from "./Nav/Nav";
+
+import TodoContainer from "./TodoContainer/TodoConatainer";
 
 const TrelloPage = () => {
   const dispatch = useDispatch();

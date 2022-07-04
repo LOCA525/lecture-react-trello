@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeBoardData } from "../../../../../../store";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import "./style.css";
 

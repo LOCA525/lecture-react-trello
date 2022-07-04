@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import "./style.css";
-import TodoBox from "./TodoBox/TodoBox";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { changeBoardData } from "../../../../store";
-
+import { changeBoardData } from "../../../store";
+import TodoBox from "../TodoBox/TodoBox";
 const TodoContainer = ({
   render,
   setRender,

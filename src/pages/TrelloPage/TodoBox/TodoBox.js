@@ -1,11 +1,11 @@
-import TodoCard from "./TodoCard/TodoCard";
+import TodoCard from "../TodoCard/TodoCard";
 import "./style.css";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
-import { changeBoardData } from "../../../../../store";
+import { changeBoardData } from "../../../store";
 
 const TodoBox = ({
   boardData,
@@ -27,22 +27,7 @@ const TodoBox = ({
   const cardData = useSelector((state) => state.cardData);
   console.log("카드쪽boardData:", boardData);
   console.log("카드쪽item:", item.cards);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:3010/cards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
-  //     .then((res) => {
-  //       console.log("카드가져오기성공", res);
-  //       if (res.status === 200) {
-  //         const data = res.data;
-  //         console.log("data:", data);
-  //         console.log("boardData:", boardData);
-  //         rendering();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+
   const editToggler = () => {
     setEditToggle(!editToggle);
     console.log(editToggle);
