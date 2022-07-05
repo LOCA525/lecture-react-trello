@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changeBoardData } from "../../../store";
+import { changeBoardData } from "../../store";
 
 const BoardItem = (props) => {
   const dispatch = useDispatch();

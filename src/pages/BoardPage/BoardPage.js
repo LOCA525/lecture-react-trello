@@ -1,11 +1,12 @@
 import Logo from "../../img/logo.svg";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import BoardItem from "./Components/BoardItem";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { changeBoardData } from "../../store";
 import { GoPerson } from "react-icons/go";
+import BoardItem from "./BoardItem";
+
 const BoardPage = () => {
   const dispatch = useDispatch();
   const [render, setRender] = useState(true);
