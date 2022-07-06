@@ -24,14 +24,9 @@ const TodoBox = ({
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
   const [todoData, setTodoData] = useState([]);
-  const cardData = useSelector((state) => state.cardData);
   console.log("카드쪽boardData:", boardData);
   console.log("카드쪽item:", item.cards);
 
-  const editToggler = () => {
-    setEditToggle(!editToggle);
-    console.log(editToggle);
-  };
   const onRemove = () => {
     axios
       .delete(`http://localhost:3010/lists/${item.id}`, {
@@ -51,6 +46,8 @@ const TodoBox = ({
     setTitleValue(TitleValue);
     const data = {
       title: TitleValue,
+      boardId: id,
+      pos: id * 24444,
     };
     setTitleData([...TitleData, data]);
 
@@ -59,12 +56,12 @@ const TodoBox = ({
       .then((res) => {
         console.log("리스트수정성공!", res);
         rendering();
-        editToggler();
-        setTitleValue("");
+        setEditToggle(!editToggle);
       })
       .catch((err) => {
         console.log(err);
       });
+    setTitleValue("");
   };
 
   const todoChange = (e) => {
@@ -76,7 +73,7 @@ const TodoBox = ({
     const data = {
       title: todoValue,
       listId: item.id,
-      pos: 70000,
+      pos: 65535,
     };
 
     setTodoData([...todoData, data]);
@@ -99,7 +96,12 @@ const TodoBox = ({
       {editToggle === true ? (
         <div className="todoTitle">
           {item.title}
-          <button className="titleEditBtn" onClick={editToggler}>
+          <button
+            className="titleEditBtn"
+            onClick={() => {
+              setEditToggle(!editToggle);
+            }}
+          >
             <GoPencil />
           </button>
           <button className="titleDeleteBtn" onClick={onRemove}>
@@ -110,11 +112,13 @@ const TodoBox = ({
         <form typeof="submit" className="editTodoForm" onSubmit={handleEditSubmit}>
           <input
             className="addTodoBoxInput"
-            onBlur={() => {
-              setEditToggle(true);
-            }}
             onChange={handleChange}
             value={TitleValue}
+            onBlur={(e) => {
+              setEditToggle(true);
+              setTitleValue("");
+            }}
+            autoFocus
           ></input>
           <button
             type="submit"
@@ -153,7 +157,7 @@ const TodoBox = ({
             console.log(cardToggle);
           }}
         >
-          +Add Cart
+          +Add Card
         </button>
       ) : (
         <form typeof="submit" className="editTodoForm" onSubmit={todoSubmit}>
@@ -162,6 +166,7 @@ const TodoBox = ({
             onChange={todoChange}
             onBlur={() => {
               setCardToggle(true);
+              setTodoValue("");
             }}
             value={todoValue}
             autoFocus

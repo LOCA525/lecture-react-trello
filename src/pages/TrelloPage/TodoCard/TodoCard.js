@@ -27,6 +27,7 @@ const TodoCard = ({ todoData, setTodoData, setTodoValue, item, rendering, todoCh
     const data = {
       title: todoValue,
       listId: item.listId,
+      pos: item.id * 24444,
     };
 
     axios
@@ -65,6 +66,7 @@ const TodoCard = ({ todoData, setTodoData, setTodoValue, item, rendering, todoCh
         value={todoValue}
         onBlur={() => {
           setEditToggle2(true);
+          setTodoValue("");
         }}
         autoFocus
       ></input>

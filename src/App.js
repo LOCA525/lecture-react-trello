@@ -8,6 +8,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<LoinPage />} />
         <Route path="/login" element={<LoinPage />} />
         <Route path="/Board" element={<BoardPage />} />
         <Route path="/trello/:id" element={<TrelloPage />} />

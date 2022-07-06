@@ -3,7 +3,8 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Nav from "./Nav/Nav";
-
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import TodoContainer from "./TodoContainer/TodoConatainer";
 
 const TrelloPage = () => {
@@ -28,17 +29,19 @@ const TrelloPage = () => {
   return (
     <div>
       <Nav boardData={boardData} />
-      <TodoContainer
-        TitleValue={TitleValue}
-        setTitleValue={setTitleValue}
-        TitleData={TitleData}
-        setTitleData={setTitleData}
-        id={id}
-        boardData={boardData}
-        render={render}
-        setRender={setRender}
-        rendering={rendering}
-      />
+      <DndProvider backend={HTML5Backend}>
+        <TodoContainer
+          TitleValue={TitleValue}
+          setTitleValue={setTitleValue}
+          TitleData={TitleData}
+          setTitleData={setTitleData}
+          id={id}
+          boardData={boardData}
+          render={render}
+          setRender={setRender}
+          rendering={rendering}
+        />
+      </DndProvider>
     </div>
   );
 };

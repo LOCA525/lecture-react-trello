@@ -44,7 +44,7 @@ const TodoContainer = ({
     const data = {
       title: TitleValue,
       boardId: id,
-      pos: id,
+      pos: id * 24444,
     };
     setTitleData([...TitleData, data]);
 
@@ -101,6 +101,7 @@ const TodoContainer = ({
               onChange={handleChange}
               onBlur={() => {
                 setToggle(true);
+                setTitleValue("");
               }}
               value={TitleValue}
               autoFocus
