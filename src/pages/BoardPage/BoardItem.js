@@ -112,6 +112,7 @@ const BoardItem = (props) => {
             value={boardData.title}
             onBlur={() => {
               setEditToggle(true);
+              props.setBoardTitle("");
             }}
             autoFocus
           />

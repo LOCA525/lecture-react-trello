@@ -25,7 +25,6 @@ const BoardPage = () => {
     setToggle(!toggle);
   };
   const onChange = (e) => {
-    console.log("e");
     setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
@@ -107,6 +106,7 @@ const BoardPage = () => {
                   onChange={onChange}
                   onBlur={() => {
                     setToggle(true);
+                    setBoardTitle("");
                   }}
                   name="title"
                   value={boardTitle.title}
