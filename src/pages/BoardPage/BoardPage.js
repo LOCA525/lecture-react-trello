@@ -28,25 +28,32 @@ const BoardPage = () => {
     setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
   };
   const onSubmit = (e) => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+    const titleValue = boardTitle.title;
+    console.log("밸류값", boardTitle);
+    if (titleValue !== null && boardTitle !== "" && titleValue !== "" && boardTitle !== null) {
+      console.log(titleValue);
+      const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
-    e.preventDefault();
-    setToggle(!toggle);
-    axios
-      .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("포스트성공", res);
-        const data = res.data;
-        const NewBoardData = data.item;
+      e.preventDefault();
+      setToggle(!toggle);
+      axios
+        .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
+        .then((res) => {
+          console.log("포스트성공", res);
+          const data = res.data;
+          const NewBoardData = data.item;
 
-        console.log("새보드데이터", NewBoardData);
-        setBoardTitle("");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+          console.log("새보드데이터", NewBoardData);
+          setBoardTitle("");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
-    console.log(boardTitle);
+      console.log("보드타이틀!!!!!", boardTitle);
+    } else {
+      alert("내용을 입력하세요.");
+    }
   };
 
   useEffect(() => {

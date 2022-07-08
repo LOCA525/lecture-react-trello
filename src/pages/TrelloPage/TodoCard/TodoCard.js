@@ -23,24 +23,26 @@ const TodoCard = ({ todoData, setTodoData, setTodoValue, item, rendering, todoCh
   };
 
   const todoEditSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      title: todoValue,
-      listId: item.listId,
-      pos: item.id * 24444,
-    };
+    if (todoValue !== null) {
+      e.preventDefault();
+      const data = {
+        title: todoValue,
+        listId: item.listId,
+        pos: item.id * 24444,
+      };
 
-    axios
-      .put(`http://localhost:3010/cards/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("카드수정성공!", res);
-        setTodoValue("");
-        rendering();
-        setEditToggle2(!editToggle2);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      axios
+        .put(`http://localhost:3010/cards/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
+        .then((res) => {
+          console.log("카드수정성공!", res);
+          setTodoValue("");
+          rendering();
+          setEditToggle2(!editToggle2);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return editToggle2 === true ? (

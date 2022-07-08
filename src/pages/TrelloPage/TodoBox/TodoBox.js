@@ -42,26 +42,28 @@ const TodoBox = ({
   };
 
   const handleEditSubmit = (e) => {
-    e.preventDefault();
-    setTitleValue(TitleValue);
-    const data = {
-      title: TitleValue,
-      boardId: id,
-      pos: id * 24444,
-    };
-    setTitleData([...TitleData, data]);
+    if (TitleValue !== null) {
+      e.preventDefault();
+      setTitleValue(TitleValue);
+      const data = {
+        title: TitleValue,
+        boardId: id,
+        pos: id * 24444,
+      };
+      setTitleData([...TitleData, data]);
 
-    axios
-      .put(`http://localhost:3010/lists/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("리스트수정성공!", res);
-        rendering();
-        setEditToggle(!editToggle);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setTitleValue("");
+      axios
+        .put(`http://localhost:3010/lists/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
+        .then((res) => {
+          console.log("리스트수정성공!", res);
+          rendering();
+          setEditToggle(!editToggle);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setTitleValue("");
+    }
   };
 
   const todoChange = (e) => {
@@ -69,27 +71,28 @@ const TodoBox = ({
     console.log(todoValue);
   };
   const todoSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      title: todoValue,
-      listId: item.id,
-      pos: 65535,
-    };
-
-    setTodoData([...todoData, data]);
-    console.log(todoData);
-    axios
-      .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("카드추가성공!", res);
-        console.log("item.cards:", item.cards);
-        rendering();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setCardToggle(!cardToggle);
-    setTodoValue("");
+    if (todoValue !== "") {
+      e.preventDefault();
+      const data = {
+        title: todoValue,
+        listId: item.id,
+        pos: 65535,
+      };
+      setTodoData([...todoData, data]);
+      console.log(todoData);
+      axios
+        .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
+        .then((res) => {
+          console.log("카드추가성공!", res);
+          console.log("item.cards:", item.cards);
+          rendering();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setCardToggle(!cardToggle);
+      setTodoValue("");
+    }
   };
   return (
     <div className="TodoBox">
@@ -154,6 +157,7 @@ const TodoBox = ({
           className="todoBoxAddBtn"
           onClick={() => {
             setCardToggle(!cardToggle);
+            setTodoValue("");
             console.log(cardToggle);
           }}
         >

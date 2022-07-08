@@ -39,26 +39,28 @@ const TodoContainer = ({
   }, [render]);
 
   const handleAddSubmit = (e) => {
-    e.preventDefault();
-    setTitleValue(TitleValue);
-    const data = {
-      title: TitleValue,
-      boardId: id,
-      pos: id * 24444,
-    };
-    setTitleData([...TitleData, data]);
+    if (TitleValue !== "") {
+      e.preventDefault();
+      setTitleValue(TitleValue);
+      const data = {
+        title: TitleValue,
+        boardId: id,
+        pos: id * 24444,
+      };
+      setTitleData([...TitleData, data]);
 
-    axios
-      .post("http://localhost:3010/lists", data, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("포스트성공!", res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setTitleValue("");
-    setToggle(!toggle);
-    setRender(!render);
+      axios
+        .post("http://localhost:3010/lists", data, { headers: { Authorization: `Bearer ${accessToken}` } })
+        .then((res) => {
+          console.log("포스트성공!", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setTitleValue("");
+      setToggle(!toggle);
+      setRender(!render);
+    }
   };
 
   const handleChange = (e) => {
