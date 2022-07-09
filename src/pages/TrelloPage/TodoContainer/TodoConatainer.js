@@ -4,6 +4,8 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
+import dragula from "dragula";
+
 const TodoContainer = ({
   render,
   setRender,
@@ -15,6 +17,10 @@ const TodoContainer = ({
   TitleData,
   setTitleData,
 }) => {
+  function init() {
+    dragula([document.querySelector(".todos"), document.querySelector(".todos")]);
+  }
+  init();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 

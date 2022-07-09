@@ -1,3 +1,8 @@
+ol,
+ul {
+  list-style: none;
+}
+
 .TodoBox {
   vertical-align: top;
   display: inline-block;

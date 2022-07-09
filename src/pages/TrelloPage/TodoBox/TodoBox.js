@@ -5,8 +5,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { changeBoardData } from "../../../store";
-import dragula from "dragula";
 import "dragula/dist/dragula.min.css";
+import dragula from "dragula";
+
 const TodoBox = ({
   boardData,
   id,
@@ -18,7 +19,6 @@ const TodoBox = ({
   rendering,
   item,
 }) => {
-  dragula();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const [editToggle, setEditToggle] = useState(true);
@@ -135,7 +135,13 @@ const TodoBox = ({
           </button>
         </form>
       )}
-      <ul className="todos" id="todos">
+      <ul
+        className="todos"
+        id="todos"
+        onClick={() => {
+          console.log("hi");
+        }}
+      >
         {item.cards.map((item) => {
           return (
             <TodoCard
