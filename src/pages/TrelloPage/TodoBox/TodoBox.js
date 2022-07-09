@@ -3,10 +3,10 @@ import "./style.css";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useEffect, useState } from "react";
 import { changeBoardData } from "../../../store";
-
+import dragula from "dragula";
+import "dragula/dist/dragula.min.css";
 const TodoBox = ({
   boardData,
   id,
@@ -18,6 +18,7 @@ const TodoBox = ({
   rendering,
   item,
 }) => {
+  dragula();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const [editToggle, setEditToggle] = useState(true);
@@ -134,9 +135,8 @@ const TodoBox = ({
           </button>
         </form>
       )}
-      <ul className="todos">
+      <ul className="todos" id="todos">
         {item.cards.map((item) => {
-          console.log(item);
           return (
             <TodoCard
               setTodoValue={setTodoValue}
