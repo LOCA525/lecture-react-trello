@@ -5,7 +5,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { changeBoardData } from "../../../store";
-import "dragula/dist/dragula.min.css";
 import dragula from "dragula";
 
 const TodoBox = ({
@@ -18,7 +17,9 @@ const TodoBox = ({
   handleChange,
   rendering,
   item,
+  init,
 }) => {
+  init();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
   const [editToggle, setEditToggle] = useState(true);
@@ -27,7 +28,6 @@ const TodoBox = ({
   const [todoData, setTodoData] = useState([]);
   console.log("카드쪽boardData:", boardData);
   console.log("카드쪽item:", item.cards);
-
   const onRemove = () => {
     axios
       .delete(`http://localhost:3010/lists/${item.id}`, {

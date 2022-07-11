@@ -1,9 +1,11 @@
 import axios from "axios";
+import dragula from "dragula";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Nav from "./Nav/Nav";
 import TodoContainer from "./TodoContainer/TodoConatainer";
+import "dragula/dist/dragula.min.css";
 
 const TrelloPage = () => {
   const dispatch = useDispatch();

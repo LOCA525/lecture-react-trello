@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import "./style.css";
+import dragula from "dragula";
 
 const TodoCard = ({ todoData, setTodoData, setTodoValue, item, rendering, todoChange, todoValue }) => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
   const [editToggle2, setEditToggle2] = useState(true);
+
   const todoDeleteClick = () => {
     axios
       .delete(`http://localhost:3010/cards/${item.id}`, {

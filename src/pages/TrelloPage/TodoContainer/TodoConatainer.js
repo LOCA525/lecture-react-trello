@@ -17,10 +17,6 @@ const TodoContainer = ({
   TitleData,
   setTitleData,
 }) => {
-  function init() {
-    dragula([document.querySelector(".todos"), document.querySelector(".todos")]);
-  }
-  init();
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
 
@@ -73,12 +69,17 @@ const TodoContainer = ({
     setTitleValue(e.target.value);
   };
 
+  function init() {
+    dragula([document.querySelector(".todos")]);
+  }
+
   return (
     <>
       <div className="TodoContainer">
         {boardData.map((item) => {
           return (
             <TodoBox
+              init={init}
               item={item}
               key={item.id}
               rendering={rendering}
