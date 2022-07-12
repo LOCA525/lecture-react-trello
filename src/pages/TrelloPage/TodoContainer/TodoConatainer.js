@@ -70,7 +70,7 @@ const TodoContainer = ({
   };
 
   function init() {
-    dragula([document.querySelector(".todos")]);
+    dragula([document.querySelector(".todos"), document.querySelector(".TodoBox")]);
   }
 
   return (
