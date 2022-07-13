@@ -6,7 +6,7 @@ ul {
 .TodoBox {
   vertical-align: top;
   display: inline-block;
-  width: 300px;
+  width: 250px;
   max-height: 100%;
   background-color: #e3e4e6;
   padding: 10px;
@@ -32,19 +32,32 @@ ul {
 }
 .editTodoForm {
   border-radius: 5px;
-  width: 280px;
-  height: 60px;
-  padding: 10px;
+  width: 230px;
+  height: 100px;
+  padding-top: 10px;
 }
 .addTodoBoxInput {
   text-align: center;
   white-space: nowrap;
   overflow-x: auto;
-  font-weight: 700;
-  font-size: 19px;
+  width: 230px;
+  height: 55px;
+  font-size: 18px;
   line-height: 35px;
-  color: #40506c;
-  border-radius: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #091e4240;
+}
+.enterBtn {
+  display: block;
+  width: 80px;
+  height: 30px;
+  padding: 4 4 10 10 px;
+  border-radius: 1px;
+  margin-top: 10px;
+  background-color: #40506c;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 30px;
 }
 .todoTitle:hover {
   background-color: #fff;

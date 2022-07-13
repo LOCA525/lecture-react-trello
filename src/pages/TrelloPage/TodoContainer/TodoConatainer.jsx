@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
 import dragula from "dragula";
-
+import AddBoxBtn from "../Controller/BoxController/AddBoxBtn";
 const TodoContainer = ({
   render,
   setRender,
@@ -19,7 +19,6 @@ const TodoContainer = ({
 }) => {
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken"));
-
   const [toggle, setToggle] = useState(true);
 
   console.log("보드데이터", boardData);
@@ -93,39 +92,14 @@ const TodoContainer = ({
             />
           );
         })}
-
-        {toggle === true ? (
-          <button
-            className="addTodoBoxBtn"
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-          >
-            +Add another list
-          </button>
-        ) : (
-          <form typeof="submit" className="addTodoForm" onSubmit={handleAddSubmit}>
-            <input
-              className="addTodoBoxInput"
-              onChange={handleChange}
-              onBlur={() => {
-                setToggle(true);
-                setTitleValue("");
-              }}
-              value={TitleValue}
-              autoFocus
-            ></input>
-            <button
-              typeof="submit"
-              className="enterBtn"
-              onMouseDown={(e) => {
-                e.preventDefault();
-              }}
-            >
-              Enter!
-            </button>
-          </form>
-        )}
+        <AddBoxBtn
+          toggle={toggle}
+          setToggle={setToggle}
+          handleChange={handleChange}
+          handleAddSubmit={handleAddSubmit}
+          TitleValue={TitleValue}
+          setTitleValue={setTitleValue}
+        />
       </div>
     </>
   );
