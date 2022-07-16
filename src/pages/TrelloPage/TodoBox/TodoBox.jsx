@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { changeBoardData } from "../../../store";
 import dragula from "dragula";
-import EditBoxBtn from "../Controller/BoxController/EditBoxBtn";
-import AddCardBtn from "../Controller/CardController/AddCardBtn";
+import EditBoxBtn from "../Controller/BoxController/EditBox";
+import AddCardBtn from "../Controller/CardController/AddCard";
 
 const TodoBox = ({
   boardData,

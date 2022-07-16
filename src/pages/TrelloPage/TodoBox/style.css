@@ -33,7 +33,7 @@ ul {
 .editTodoForm {
   border-radius: 5px;
   width: 230px;
-  height: 100px;
+  height: 120px;
   padding-top: 10px;
 }
 .addTodoBoxInput {
@@ -43,21 +43,19 @@ ul {
   width: 230px;
   height: 55px;
   font-size: 18px;
-  line-height: 35px;
+  line-height: 18px;
   border-radius: 5px;
   box-shadow: 0 1px 0 #091e4240;
 }
 .enterBtn {
   display: block;
   width: 80px;
-  height: 30px;
-  padding: 4 4 10 10 px;
-  border-radius: 1px;
+  height: 40px;
   margin-top: 10px;
   background-color: #40506c;
   color: #ffffff;
   font-size: 15px;
-  line-height: 30px;
+  line-height: 15px;
 }
 .todoTitle:hover {
   background-color: #fff;

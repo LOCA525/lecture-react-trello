@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
 import dragula from "dragula";
-import AddBoxBtn from "../Controller/BoxController/AddBoxBtn";
+import AddBoxBtn from "../Controller/BoxController/AddBox";
 const TodoContainer = ({
   render,
   setRender,

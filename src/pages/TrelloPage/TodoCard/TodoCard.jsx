@@ -1,5 +1,5 @@
 import "./style.css";
-import EditCardBtn from "../Controller/CardController/EditCardBtn";
+import EditCardBtn from "../Controller/CardController/EditCard";
 
 const TodoCard = ({ setTodoValue, item, rendering, todoChange, todoValue }) => {
   return (
