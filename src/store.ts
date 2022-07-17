@@ -1,8 +1,8 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 let email = createSlice({
   name: "email",
-  initialState: "",
+  initialState: "" as string,
   reducers: {
     changeEmail(state, a) {
       return a.payload;
@@ -12,9 +12,9 @@ let email = createSlice({
 
 let token = createSlice({
   name: "token",
-  initialState: "",
+  initialState: "" as string,
   reducers: {
-    changeToken(state, a) {
+    changeToken(state, a: PayloadAction<string>) {
       return a.payload;
     },
   },
@@ -22,7 +22,7 @@ let token = createSlice({
 
 let boardData = createSlice({
   name: "boardData",
-  initialState: [],
+  initialState: [] as [],
   reducers: {
     changeBoardData(state, a) {
       return a.payload;
@@ -40,7 +40,7 @@ let cardData = createSlice({
   },
 });
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
     email: email.reducer,
     token: token.reducer,
@@ -48,6 +48,8 @@ export default configureStore({
     cardData: cardData.reducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export let { changeEmail } = email.actions;
 export let { changeToken } = token.actions;

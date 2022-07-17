@@ -3,7 +3,7 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { changeBoardData } from "../../store";
+import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
 import BoardItem from "./BoardItem";
 
@@ -12,25 +12,25 @@ const BoardPage = () => {
   const [render, setRender] = useState(true);
   const [toggle, setToggle] = useState(true);
   const [boardTitle, setBoardTitle] = useState({ title: "" });
-  let boardData = useSelector((state) => {
+  let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
-  let userEmail = useSelector((state) => {
+  let userEmail = useSelector((state: RootState) => {
     return state.email;
   });
 
-  const handleAddClick = (e) => {
+  const handleAddClick = (e: any) => {
     setToggle(!toggle);
   };
-  const onChange = (e) => {
-    setBoardTitle({ ...boardTitle, [e.target.name]: e.target.value });
+  const onChange = (e: any) => {
+    setBoardTitle({ title: e.target.value });
   };
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     const titleValue = boardTitle.title;
     console.log("밸류값", boardTitle);
-    if (titleValue !== null && boardTitle !== "" && titleValue !== "" && boardTitle !== null) {
+    if (titleValue !== null && titleValue !== "" && boardTitle !== null) {
       console.log(titleValue);
-      const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+      const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
       e.preventDefault();
       setToggle(!toggle);
@@ -111,7 +111,7 @@ const BoardPage = () => {
                   onChange={onChange}
                   onBlur={() => {
                     setToggle(true);
-                    setBoardTitle("");
+                    setBoardTitle({ title: "" });
                   }}
                   name="title"
                   value={boardTitle.title}

@@ -1,17 +1,17 @@
 import "./style.css";
 import Logo from "../../img/logo.svg";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEmail, changeToken, changeBoardData } from "../../store";
+import { changeEmail, changeToken, changeBoardData, RootState } from "../../store";
 
 const LoinPage = () => {
-  let accessToken = useSelector((state) => {
+  let accessToken = useSelector((state: RootState) => {
     return state.token;
   });
 
-  let boardData = useSelector((state) => {
+  let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
   let reduxState = useSelector((state) => {
@@ -27,11 +27,11 @@ const LoinPage = () => {
   });
   const navigate = useNavigate();
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value }); /// <== 요거 멋짐
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("loginForm은", loginForm);
     axios
