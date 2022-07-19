@@ -3,26 +3,25 @@ import { useEffect, useRef, useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changeBoardData } from "../../store";
+import { changeBoardData, RootState } from "../../store";
 
-const BoardItem = (props) => {
+const BoardItem = (props: any) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  ///프롭스부분 고장 ..
   const [editToggle, setEditToggle] = useState(true);
-  let accessToken = useSelector((state) => {
+  let accessToken = useSelector((state: RootState) => {
     return state.token;
   });
 
-  let boardData = useSelector((state) => {
+  let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
   const handleEditClick = () => {
     setEditToggle(!editToggle);
   };
   const onRemove = () => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
     axios
       .delete(`http://localhost:3010/boards/${props.item.id}`, {
@@ -36,8 +35,8 @@ const BoardItem = (props) => {
         console.log(err);
       });
   };
-  const editSubmit = (e) => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const editSubmit = (e: any) => {
+    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
     e.preventDefault();
     axios
@@ -60,7 +59,7 @@ const BoardItem = (props) => {
       });
   };
   const goListClick = () => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
     axios
       .get(`http://localhost:3010/boards/${props.item.id}`, { headers: { Authorization: `Bearer ${accessToken}` } })

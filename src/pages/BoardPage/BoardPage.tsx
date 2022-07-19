@@ -42,7 +42,7 @@ const BoardPage = () => {
           const NewBoardData = data.item;
 
           console.log("새보드데이터", NewBoardData);
-          setBoardTitle("");
+          setBoardTitle({ title: "" });
         })
         .catch((err) => {
           console.log(err);
@@ -55,7 +55,7 @@ const BoardPage = () => {
   };
 
   useEffect(() => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
     axios
       .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
