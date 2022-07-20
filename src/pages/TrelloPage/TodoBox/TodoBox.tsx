@@ -3,8 +3,7 @@ import "./style.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { changeBoardData } from "../../../store";
-import dragula from "dragula";
+import { changeBoardData, RootState } from "../../../store";
 import EditBoxBtn from "../Controller/BoxController/EditBox";
 import AddCardBtn from "../Controller/CardController/AddCard";
 
@@ -18,9 +17,8 @@ const TodoBox = ({
   handleChange,
   rendering,
   item,
-  init,
-}) => {
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+}: any) => {
+  const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
@@ -40,7 +38,7 @@ const TodoBox = ({
       });
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = (e: any) => {
     if (TitleValue !== null) {
       e.preventDefault();
       setTitleValue(TitleValue);
@@ -65,7 +63,7 @@ const TodoBox = ({
     }
   };
 
-  const todoChange = (e) => {
+  const todoChange = (e: any) => {
     setTodoValue(e.target.value);
   };
 
@@ -88,7 +86,7 @@ const TodoBox = ({
           console.log("hi");
         }}
       >
-        {item.cards.map((item) => {
+        {item.cards.map((item: any) => {
           return (
             <TodoCard
               setTodoValue={setTodoValue}

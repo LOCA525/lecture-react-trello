@@ -84,7 +84,7 @@ const BoardPage = () => {
           </h2>
         </div>
         <div className="boardBox">
-          {boardData.map((item) => {
+          {boardData.map((item: any) => {
             return (
               <BoardItem
                 item={item}

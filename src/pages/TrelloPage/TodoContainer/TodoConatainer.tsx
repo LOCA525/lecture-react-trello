@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
-import dragula from "dragula";
 import AddBoxBtn from "../Controller/BoxController/AddBox";
 const TodoContainer = ({
   render,
@@ -16,9 +15,9 @@ const TodoContainer = ({
   setTitleValue,
   TitleData,
   setTitleData,
-}) => {
+}: any) => {
   const dispatch = useDispatch();
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+  const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [toggle, setToggle] = useState(true);
 
   console.log("보드데이터", boardData);
@@ -39,7 +38,7 @@ const TodoContainer = ({
       });
   }, [render]);
 
-  const handleAddSubmit = (e) => {
+  const handleAddSubmit = (e: any) => {
     if (TitleValue !== "") {
       e.preventDefault();
       setTitleValue(TitleValue);
@@ -64,21 +63,16 @@ const TodoContainer = ({
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setTitleValue(e.target.value);
   };
-
-  function init() {
-    dragula([document.querySelector(".todos"), document.querySelector(".TodoBox")]);
-  }
 
   return (
     <>
       <div className="TodoContainer">
-        {boardData.map((item) => {
+        {boardData.map((item: any) => {
           return (
             <TodoBox
-              init={init}
               item={item}
               key={item.id}
               rendering={rendering}
