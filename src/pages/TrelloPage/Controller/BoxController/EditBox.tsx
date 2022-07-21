@@ -9,7 +9,7 @@ const EditBoxBtn = ({
   item,
   onRemove,
   handleEditSubmit,
-}) => {
+}: any) => {
   return (
     <>
       {editToggle === true ? (

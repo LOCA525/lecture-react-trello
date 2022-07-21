@@ -11,8 +11,8 @@ const AddCardBtn = ({
   rendering,
   item,
   todoChange,
-}) => {
-  const todoSubmit = (e) => {
+}: any) => {
+  const todoSubmit = (e: any) => {
     if (todoValue !== "") {
       e.preventDefault();
       const data = {

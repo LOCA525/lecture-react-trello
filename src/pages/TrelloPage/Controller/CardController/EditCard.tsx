@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 
-const EditCardBtn = ({ rendering, todoValue, setTodoValue, todoChange, item }) => {
-  const accessToken = JSON.parse(localStorage.getItem("accessToken"));
+const EditCardBtn = ({ rendering, todoValue, setTodoValue, todoChange, item }: any) => {
+  const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
   const [editToggle2, setEditToggle2] = useState(true);
 
@@ -21,7 +21,7 @@ const EditCardBtn = ({ rendering, todoValue, setTodoValue, todoChange, item }) =
       });
   };
 
-  const todoEditSubmit = (e) => {
+  const todoEditSubmit = (e: any) => {
     if (todoValue !== null) {
       e.preventDefault();
       const data = {

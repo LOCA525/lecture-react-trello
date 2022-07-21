@@ -1,4 +1,4 @@
-const AddBoxBtn = ({ TitleValue, setTitleValue, toggle, setToggle, handleAddSubmit, handleChange }) => {
+const AddBoxBtn = ({ TitleValue, setTitleValue, toggle, setToggle, handleAddSubmit, handleChange }: any) => {
   return (
     <>
       {toggle === true ? (
