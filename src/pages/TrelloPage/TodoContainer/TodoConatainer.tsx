@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
 import AddBoxBtn from "../Controller/BoxController/AddBox";
+import { useParams } from "react-router-dom";
 const TodoContainer = ({
   render,
   setRender,
@@ -19,6 +20,9 @@ const TodoContainer = ({
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [toggle, setToggle] = useState(true);
+  let { listId } = useParams();
+  console.log(listId);
+  console.log(id);
 
   console.log("보드데이터", boardData);
   useEffect(() => {
@@ -45,7 +49,7 @@ const TodoContainer = ({
       const data = {
         title: TitleValue,
         boardId: id,
-        pos: id * 24444,
+        pos: listId,
       };
       setTitleData([...TitleData, data]);
 

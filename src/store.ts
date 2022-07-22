@@ -22,7 +22,7 @@ let token = createSlice({
 
 let boardData = createSlice({
   name: "boardData",
-  initialState: [] as [],
+  initialState: [] as string[],
   reducers: {
     changeBoardData(state, a) {
       return a.payload;
