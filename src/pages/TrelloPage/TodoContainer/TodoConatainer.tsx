@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./style.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeBoardData } from "../../../store";
 import TodoBox from "../TodoBox/TodoBox";
 import AddBoxBtn from "../Controller/BoxController/AddBox";
-import { useParams } from "react-router-dom";
+
 const TodoContainer = ({
   render,
   setRender,
@@ -20,9 +20,9 @@ const TodoContainer = ({
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [toggle, setToggle] = useState(true);
-  let { listId } = useParams();
+
+  const listId = useRef();
   console.log(listId);
-  console.log(id);
 
   console.log("보드데이터", boardData);
   useEffect(() => {

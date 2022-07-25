@@ -17,6 +17,8 @@ const BoardItem = (props: any) => {
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
+  console.log(boardData);
+
   const handleEditClick = () => {
     setEditToggle(!editToggle);
   };
@@ -108,7 +110,7 @@ const BoardItem = (props: any) => {
             className="boardAddInput"
             onChange={props.onChange}
             name="title"
-            value={boardData.title}
+            value={props.boardTitle.title}
             onBlur={() => {
               setEditToggle(true);
               props.setBoardTitle("");

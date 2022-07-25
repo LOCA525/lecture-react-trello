@@ -1,4 +1,12 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+interface boardData {
+  bgColor: string;
+  createdAt: string;
+  id: number;
+  title: string;
+  updatedAt: string;
+  userId: number;
+}
 
 let email = createSlice({
   name: "email",
@@ -22,7 +30,7 @@ let token = createSlice({
 
 let boardData = createSlice({
   name: "boardData",
-  initialState: [] as string[],
+  initialState: [] as boardData[],
   reducers: {
     changeBoardData(state, a) {
       return a.payload;
