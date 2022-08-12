@@ -1,23 +1,11 @@
-import TodoCard from "../TodoCard/TodoCard";
 import "./style.css";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { changeBoardData, RootState } from "../../../store";
-import EditBoxBtn from "../Controller/BoxController/EditBox";
-import AddCardBtn from "../Controller/CardController/AddCard";
+import { useState } from "react";
+import EditCardList from "../EditCardList";
+import AddCard from "../AddCard";
+import Card from "../Card";
 
-const TodoBox = ({
-  boardData,
-  id,
-  setTitleData,
-  setTitleValue,
-  TitleData,
-  TitleValue,
-  handleChange,
-  rendering,
-  item,
-}: any) => {
+const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
@@ -47,7 +35,6 @@ const TodoBox = ({
         boardId: id,
         pos: id * 24444,
       };
-      setTitleData([...TitleData, data]);
 
       axios
         .put(`http://localhost:3010/lists/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -69,13 +56,12 @@ const TodoBox = ({
 
   return (
     <div className="TodoBox">
-      <EditBoxBtn
+      <EditCardList
         editToggle={editToggle}
         setEditToggle={setEditToggle}
         item={item}
         onRemove={onRemove}
         handleEditSubmit={handleEditSubmit}
-        handleChange={handleChange}
         TitleValue={TitleValue}
         setTitleValue={setTitleValue}
       />
@@ -88,7 +74,8 @@ const TodoBox = ({
       >
         {item.cards.map((item: any) => {
           return (
-            <TodoCard
+            <Card
+              key={item.id}
               setTodoValue={setTodoValue}
               setTodoData={setTodoData}
               todoData={todoData}
@@ -101,7 +88,7 @@ const TodoBox = ({
           );
         })}
       </ul>
-      <AddCardBtn
+      <AddCard
         cardToggle={cardToggle}
         setCardToggle={setCardToggle}
         todoValue={todoValue}
@@ -117,4 +104,4 @@ const TodoBox = ({
   );
 };
 
-export default TodoBox;
+export default CardList;

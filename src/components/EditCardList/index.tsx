@@ -1,15 +1,18 @@
 import { GoTrashcan, GoPencil } from "react-icons/go";
 
-const EditBoxBtn = ({
+const EditCardList = ({
   setTitleValue,
   TitleValue,
-  handleChange,
+
   editToggle,
   setEditToggle,
   item,
   onRemove,
   handleEditSubmit,
 }: any) => {
+  const handleChange = (e: any) => {
+    setTitleValue(e.target.value);
+  };
   return (
     <>
       {editToggle === true ? (
@@ -54,4 +57,4 @@ const EditBoxBtn = ({
   );
 };
 
-export default EditBoxBtn;
+export default EditCardList;

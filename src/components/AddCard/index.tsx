@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AddCardBtn = ({
+const AddCard = ({
   accessToken,
   cardToggle,
   setCardToggle,
@@ -76,4 +76,4 @@ const AddCardBtn = ({
   );
 };
 
-export default AddCardBtn;
+export default AddCard;

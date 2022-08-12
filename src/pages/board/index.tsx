@@ -1,30 +1,30 @@
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Nav from "../../components/Nav";
 import "./style.css";
+import "dragula/dist/dragula.min.css";
+import { changeBoardData, RootState } from "../../store";
+import AddCardList from "../../components/AddCardList";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { changeBoardData } from "../../../store";
-import TodoBox from "../TodoBox/TodoBox";
-import AddBoxBtn from "../Controller/BoxController/AddBox";
+import CardList from "../../components/CardList";
 
-const TodoContainer = ({
-  render,
-  setRender,
-  rendering,
-  boardData,
-  id,
-  TitleValue,
-  setTitleValue,
-  TitleData,
-  setTitleData,
-}: any) => {
+const BoardPage = () => {
+  let boardData = useSelector((state: RootState) => {
+    return state.boardData;
+  });
+  let { id } = useParams();
+
+  const [TitleValue, setTitleValue] = useState("");
+  const [render, setRender] = useState(true);
+  const rendering = () => {
+    setRender(!render);
+  };
+
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-  const [toggle, setToggle] = useState(true);
-
   const listId = useRef();
-  console.log(listId);
 
-  console.log("보드데이터", boardData);
   useEffect(() => {
     axios
       .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -51,7 +51,6 @@ const TodoContainer = ({
         boardId: id,
         pos: listId,
       };
-      setTitleData([...TitleData, data]);
 
       axios
         .post("http://localhost:3010/lists", data, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -62,45 +61,30 @@ const TodoContainer = ({
           console.log(err);
         });
       setTitleValue("");
-      setToggle(!toggle);
       setRender(!render);
     }
   };
 
-  const handleChange = (e: any) => {
-    setTitleValue(e.target.value);
-  };
-
   return (
-    <>
+    <div>
+      <Nav boardData={boardData} />
       <div className="TodoContainer">
         {boardData.map((item: any) => {
           return (
-            <TodoBox
+            <CardList
               item={item}
               key={item.id}
               rendering={rendering}
               TitleValue={TitleValue}
-              handleChange={handleChange}
-              TitleData={TitleData}
               setTitleValue={setTitleValue}
-              setTitleData={setTitleData}
               id={id}
-              boardData={boardData}
             />
           );
         })}
-        <AddBoxBtn
-          toggle={toggle}
-          setToggle={setToggle}
-          handleChange={handleChange}
-          handleAddSubmit={handleAddSubmit}
-          TitleValue={TitleValue}
-          setTitleValue={setTitleValue}
-        />
+        <AddCardList handleAddSubmit={handleAddSubmit} TitleValue={TitleValue} setTitleValue={setTitleValue} />
       </div>
-    </>
+    </div>
   );
 };
 
-export default TodoContainer;
+export default BoardPage;

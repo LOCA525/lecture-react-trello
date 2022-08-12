@@ -1,4 +1,11 @@
-const AddBoxBtn = ({ TitleValue, setTitleValue, toggle, setToggle, handleAddSubmit, handleChange }: any) => {
+import { useState } from "react";
+
+const AddCardList = ({ TitleValue, setTitleValue, handleAddSubmit }: any) => {
+  const [toggle, setToggle] = useState(true);
+
+  const handleChange = (e: any) => {
+    setTitleValue(e.target.value);
+  };
   return (
     <>
       {toggle === true ? (
@@ -37,4 +44,4 @@ const AddBoxBtn = ({ TitleValue, setTitleValue, toggle, setToggle, handleAddSubm
   );
 };
 
-export default AddBoxBtn;
+export default AddCardList;

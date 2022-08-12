@@ -5,10 +5,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
-import BoardItem from "./BoardItem";
 
-const BoardPage = () => {
+import { useNavigate } from "react-router-dom";
+import BoardItem from "../../components/BoardItem/BoardItem";
+const BoardsPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [render, setRender] = useState(true);
   const [toggle, setToggle] = useState(true);
   const [boardTitle, setBoardTitle] = useState({ title: "" });
@@ -69,7 +71,9 @@ const BoardPage = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status) {
+          navigate("/login");
+        }
       });
   }, [toggle, render]);
 
@@ -136,4 +140,4 @@ const BoardPage = () => {
   );
 };
 
-export default BoardPage;
+export default BoardsPage;

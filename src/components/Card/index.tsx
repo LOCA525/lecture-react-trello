@@ -1,8 +1,9 @@
-import axios from "axios";
+import "./style.css";
 import { useState } from "react";
-import { GoTrashcan, GoPencil } from "react-icons/go";
+import axios from "axios";
+import { GoPencil, GoTrashcan } from "react-icons/go";
 
-const EditCardBtn = ({ rendering, todoValue, setTodoValue, todoChange, item }: any) => {
+const Card = ({ setTodoValue, item, rendering, todoChange, todoValue }: any) => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
   const [editToggle2, setEditToggle2] = useState(true);
@@ -87,4 +88,4 @@ const EditCardBtn = ({ rendering, todoValue, setTodoValue, todoChange, item }: a
   );
 };
 
-export default EditCardBtn;
+export default Card;

@@ -73,7 +73,7 @@ const BoardItem = (props: any) => {
           const data = res.data.item.lists;
           console.log(data);
           dispatch(changeBoardData(data));
-          navigate(`/trello/${boardId}`);
+          navigate(`/boards/${boardId}`);
           console.log("리스트이동성공후보드데이터:", boardData);
         }
       })
