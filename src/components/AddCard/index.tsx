@@ -18,15 +18,16 @@ const AddCard = ({
       const data = {
         title: todoValue,
         listId: item.id,
-        pos: 65535,
+        pos: 65535 * item.cards.length,
       };
       setTodoData([...todoData, data]);
-      console.log(todoData);
+      console.log("todoData", todoData);
       axios
         .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
         .then((res) => {
           console.log("카드추가성공!", res);
           console.log("item.cards:", item.cards);
+
           rendering();
         })
         .catch((err) => {
