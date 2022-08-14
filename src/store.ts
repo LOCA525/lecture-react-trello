@@ -4,6 +4,7 @@ interface boardData {
   createdAt: string;
   id: number;
   title: string;
+  pos: number;
   updatedAt: string;
   userId: number;
 }

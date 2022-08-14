@@ -10,7 +10,6 @@ const AddCard = ({
   setTodoData,
   rendering,
   item,
-  todoChange,
 }: any) => {
   const todoSubmit = (e: any) => {
     if (todoValue !== "") {
@@ -18,7 +17,7 @@ const AddCard = ({
       const data = {
         title: todoValue,
         listId: item.id,
-        pos: 65535 * item.cards.length,
+        pos: 65535 + (item.cards[item.cards.length - 1]?.pos ?? 1), //포지션값 설정 마지막 요소의 포지션값 //옵셔널 체이닝
       };
       setTodoData([...todoData, data]);
       console.log("todoData", todoData);
@@ -37,6 +36,9 @@ const AddCard = ({
       setTodoValue("");
     }
   };
+  const todoEditChange = (e: any) => {
+    setTodoValue(e.target.value);
+  };
   return (
     <div>
       {cardToggle === true ? (
@@ -54,7 +56,7 @@ const AddCard = ({
         <form typeof="submit" className="editTodoForm" onSubmit={todoSubmit}>
           <input
             className="addTodoBoxInput"
-            onChange={todoChange}
+            onChange={todoEditChange}
             onBlur={() => {
               setCardToggle(true);
               setTodoValue("");

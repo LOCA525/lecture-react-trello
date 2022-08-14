@@ -3,14 +3,13 @@ import { GoTrashcan, GoPencil } from "react-icons/go";
 const EditCardList = ({
   setTitleValue,
   TitleValue,
-
   editToggle,
   setEditToggle,
   item,
   onRemove,
   handleEditSubmit,
 }: any) => {
-  const handleChange = (e: any) => {
+  const handleEditChange = (e: any) => {
     setTitleValue(e.target.value);
   };
   return (
@@ -34,7 +33,7 @@ const EditCardList = ({
         <form typeof="submit" className="editTodoForm" onSubmit={handleEditSubmit}>
           <input
             className="addTodoBoxInput"
-            onChange={handleChange}
+            onChange={handleEditChange}
             value={TitleValue}
             onBlur={() => {
               setEditToggle(true);

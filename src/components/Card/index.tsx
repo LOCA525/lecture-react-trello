@@ -28,7 +28,7 @@ const Card = ({ setTodoValue, item, rendering, todoChange, todoValue }: any) => 
       const data = {
         title: todoValue,
         listId: item.listId,
-        pos: item.id * 24444,
+        pos: item.pos,
       };
 
       axios

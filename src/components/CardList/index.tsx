@@ -33,7 +33,7 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
       const data = {
         title: TitleValue,
         boardId: id,
-        pos: id * 24444,
+        pos: item.pos,
       };
 
       axios
@@ -98,7 +98,6 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
         rendering={rendering}
         item={item}
         accessToken={accessToken}
-        todoChange={todoChange}
       />
     </div>
   );

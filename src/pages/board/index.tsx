@@ -49,7 +49,7 @@ const BoardPage = () => {
       const data = {
         title: TitleValue,
         boardId: id,
-        pos: listId,
+        pos: 65535 + (boardData[boardData.length - 1]?.pos ?? 1),
       };
 
       axios
