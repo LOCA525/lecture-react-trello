@@ -7,7 +7,7 @@ import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
 
 import { useNavigate } from "react-router-dom";
-import BoardItem from "../../components/BoardItem/BoardItem";
+import BoardItem from "../../components/BoardItem";
 const BoardsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

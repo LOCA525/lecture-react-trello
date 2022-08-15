@@ -8,8 +8,10 @@ import { changeBoardData, RootState } from "../../store";
 import AddCardList from "../../components/AddCardList";
 import axios from "axios";
 import CardList from "../../components/CardList";
+import dragula from "dragula";
 
 const BoardPage = () => {
+  const todoContainer = useRef<any>();
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
@@ -23,8 +25,6 @@ const BoardPage = () => {
 
   const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-  const listId = useRef();
-
   useEffect(() => {
     axios
       .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
@@ -41,6 +41,10 @@ const BoardPage = () => {
         console.log(err);
       });
   }, [render]);
+
+  // dragula([]);
+  // useEffect(() => {
+  // }, []);
 
   const handleAddSubmit = (e: any) => {
     if (TitleValue !== "") {
@@ -68,7 +72,7 @@ const BoardPage = () => {
   return (
     <div>
       <Nav boardData={boardData} />
-      <div className="TodoContainer">
+      <div className="TodoContainer" ref={todoContainer}>
         {boardData.map((item: any) => {
           return (
             <CardList

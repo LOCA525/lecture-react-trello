@@ -4,6 +4,7 @@ import { useState } from "react";
 import EditCardList from "../EditCardList";
 import AddCard from "../AddCard";
 import Card from "../Card";
+import dragula from "dragula";
 
 const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
@@ -72,9 +73,10 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
           console.log("hi");
         }}
       >
-        {item.cards.map((item: any) => {
+        {item.cards.map((item: any, index: number) => {
           return (
             <Card
+              index={index}
               key={item.id}
               setTodoValue={setTodoValue}
               setTodoData={setTodoData}
