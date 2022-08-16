@@ -8,7 +8,6 @@ import { changeBoardData, RootState } from "../../store";
 import AddCardList from "../../components/AddCardList";
 import axios from "axios";
 import CardList from "../../components/CardList";
-import dragula from "dragula";
 
 const BoardPage = () => {
   const todoContainer = useRef<any>();
@@ -41,10 +40,6 @@ const BoardPage = () => {
         console.log(err);
       });
   }, [render]);
-
-  // dragula([]);
-  // useEffect(() => {
-  // }, []);
 
   const handleAddSubmit = (e: any) => {
     if (TitleValue !== "") {
