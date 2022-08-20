@@ -1,11 +1,9 @@
-import Logo from "../../img/logo.svg";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
-
 import { useNavigate } from "react-router-dom";
 import BoardItem from "../../components/BoardItem";
 const BoardsPage = () => {
@@ -29,9 +27,8 @@ const BoardsPage = () => {
   };
   const onSubmit = (e: any) => {
     const titleValue = boardTitle.title;
-    console.log("밸류값", boardTitle);
+
     if (titleValue !== null && titleValue !== "" && boardTitle !== null) {
-      console.log(titleValue);
       const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
       e.preventDefault();
@@ -39,11 +36,9 @@ const BoardsPage = () => {
       axios
         .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
         .then((res) => {
-          console.log("포스트성공", res);
           const data = res.data;
           const NewBoardData = data.item;
 
-          console.log("새보드데이터", NewBoardData);
           setBoardTitle({ title: "" });
         })
         .catch((err) => {
@@ -62,12 +57,10 @@ const BoardsPage = () => {
     axios
       .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
-        console.log("가져오기성공", res);
         if (res.status === 200) {
           const data = res.data;
           const dataList = data.list;
           dispatch(changeBoardData(dataList));
-          console.log("보드데이터", boardData);
         }
       })
       .catch((err) => {
@@ -80,7 +73,6 @@ const BoardsPage = () => {
   return (
     <div>
       <div className="container">
-        <img className="logo" src={Logo} alt="logo!" />
         <div>
           <h2 className="title">
             <GoPerson />
@@ -104,7 +96,7 @@ const BoardsPage = () => {
 
           {toggle === true ? (
             <button className="addBoardBtn" onClick={handleAddClick}>
-              <div>⊕</div>
+              <div>Create new board</div>
             </button>
           ) : (
             <div className="boardItem">
@@ -128,7 +120,7 @@ const BoardsPage = () => {
                     e.preventDefault();
                   }}
                 >
-                  Enter!
+                  Enter
                 </button>
               </form>
               <div className="boardTitle"></div>

@@ -39,7 +39,7 @@ const LoinPage = () => {
       .then((res) => {
         console.log("포스트성공", res);
         if (res.status === 200) {
-          navigate("/board");
+          navigate("/boards");
         }
         const data = res.data;
         const accessToken = data.accessToken;

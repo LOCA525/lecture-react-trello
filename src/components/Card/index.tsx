@@ -2,7 +2,6 @@ import "./style.css";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { GoPencil, GoTrashcan } from "react-icons/go";
-import dragula from "dragula";
 
 const Card = ({ setTodoValue, item, rendering, todoChange, todoValue, index }: any) => {
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);

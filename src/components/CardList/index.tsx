@@ -66,14 +66,8 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
         TitleValue={TitleValue}
         setTitleValue={setTitleValue}
       />
-      <ul
-        className="todos"
-        id="todos"
-        onClick={() => {
-          console.log("hi");
-        }}
-      >
-        {item.cards.map((item: any, index: number) => {
+      <ul className="todos">
+        {item.cards?.map((item: any, index: number) => {
           return (
             <Card
               index={index}

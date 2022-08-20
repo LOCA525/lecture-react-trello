@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Nav from "../../components/Nav";
 import "./style.css";
 import "dragula/dist/dragula.min.css";
 import { changeBoardData, RootState } from "../../store";
@@ -14,6 +13,8 @@ const BoardPage = () => {
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
+  console.log("boardData", boardData);
+
   let { id } = useParams();
 
   const [TitleValue, setTitleValue] = useState("");
@@ -28,7 +29,6 @@ const BoardPage = () => {
     axios
       .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
       .then((res) => {
-        console.log("리스트가져오기성공", res);
         if (res.status === 200) {
           const data = res.data;
           const dataItem = data.item;
@@ -65,8 +65,8 @@ const BoardPage = () => {
   };
 
   return (
-    <div>
-      <Nav boardData={boardData} />
+    <div className="boardContainer">
+      <div className="mainBoard">MainBoard</div>
       <div className="TodoContainer" ref={todoContainer}>
         {boardData.map((item: any) => {
           return (

@@ -4,6 +4,7 @@ import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changeBoardData, RootState } from "../../store";
+import dayjs from "dayjs";
 
 const BoardItem = (props: any) => {
   const dispatch = useDispatch();
@@ -17,7 +18,6 @@ const BoardItem = (props: any) => {
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
-  console.log(boardData);
 
   const handleEditClick = () => {
     setEditToggle(!editToggle);
@@ -102,7 +102,7 @@ const BoardItem = (props: any) => {
           <div className="boardTitle" onClick={goListClick}>
             {props.item.title}
           </div>
-          <div className="createdAtData">{props.item.createdAt}</div>
+          <div className="createdAtData">{dayjs(props.item.createdAt).format("YYYY-MM-DD")}</div>
         </div>
       ) : (
         <form typeof="submit" className="boardAddSubmit" onSubmit={editSubmit}>

@@ -1,31 +1,26 @@
 .container {
   margin: 0 auto;
+  width: 850px;
 }
 
 .container .title {
   margin-top: 20px;
   margin-bottom: 20px;
-  font-size: 30px;
-  text-align: center;
-  color: #1d232e;
+  font-size: 25px;
+  color: #5e6c84;
   letter-spacing: -0.01em;
 }
 
 .container .boardBox {
-  height: calc(100vh - 260px);
   overflow: scroll;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-content: flex-start;
   background-color: #ffffff;
-  max-width: 500px;
   border-radius: 3px;
-  padding: 25px 40px;
-  box-shadow: rgb(0 0 0 / 40%) 0 0 10px;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 20px;
+  padding: 5px;
 }
 
 .boardItem {
@@ -61,22 +56,18 @@
 }
 
 .addBoardBtn {
-  margin-right: 10px;
-  margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #5e6c84;
-  opacity: 30%;
+  background-color: #091e420a;
   width: 200px;
   height: 100px;
-  color: #fff;
-  padding: 5px;
+  color: #172b4d;
   text-align: center;
-  font-size: 40px;
+  font-size: 15px;
   cursor: pointer;
 }
 
 .addBoardBtn:hover {
-  border: #1d232e solid 2px;
+  background-color: #091e4214;
 }
 
 .boardAddSubmit {
@@ -84,6 +75,7 @@
   justify-content: center;
 }
 .boardAddInput {
+  padding: 10px;
   width: 120px;
   font-size: 17px;
   background-color: transparent;
@@ -91,12 +83,11 @@
 }
 .enterBtn {
   vertical-align: top;
-  padding: 2px;
-  border-radius: 10px;
+  padding: 1px;
   background-color: #40506c;
   color: #ffffff;
   font-size: 15px;
-  line-height: 30px;
+  line-height: 15px;
 }
 
 .deleteBtn {
@@ -126,4 +117,42 @@
   font-size: 10px;
   bottom: 5px;
   right: 5px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 100%;
+    padding: 20px;
+  }
+  .container .boardBox {
+    justify-content: normal;
+  }
+  .boardItem {
+    width: 32%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+  }
+  .boardItem:nth-child(3n) {
+    margin-right: 0;
+  }
+  .addBoardBtn {
+    width: 32%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container .boardBox {
+    justify-content: space-between;
+  }
+  .boardItem {
+    width: 49%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+  }
+  .boardItem:nth-child(2n) {
+    margin-right: 0;
+  }
+  .addBoardBtn {
+    width: 49%;
+  }
 }
