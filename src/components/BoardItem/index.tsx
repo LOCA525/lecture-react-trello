@@ -5,81 +5,57 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changeBoardData, RootState } from "../../store";
 import dayjs from "dayjs";
+import { deleteBoardsApi, getBoardsApi, putBoardsApi } from "../../api/board";
 
-const BoardItem = (props: any) => {
+interface Props {
+  item: any;
+}
+
+const BoardItem = ({ item }: Props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [editToggle, setEditToggle] = useState(true);
-  let accessToken = useSelector((state: RootState) => {
-    return state.token;
-  });
-
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
+  const navigate = useNavigate();
 
-  const handleEditClick = () => {
-    setEditToggle(!editToggle);
+  const [editToggle, setEditToggle] = useState(true);
+  const [boardTitle, setBoardTitle] = useState<string>("");
+
+  const onChange = (e: any) => {
+    setBoardTitle(e.target.value);
   };
-  const onRemove = () => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
-    axios
-      .delete(`http://localhost:3010/boards/${props.item.id}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        console.log("삭제성공", res);
-        props.setRender(!props.render);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const onRemove = async () => {
+    try {
+      const res = await deleteBoardsApi(item.id);
+
+      if (res.status === 204) {
+        const res = await getBoardsApi();
+        dispatch(changeBoardData(res.data.list));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const editSubmit = (e: any) => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
+  const editSubmit = async (e: any) => {
     e.preventDefault();
-    axios
-      .put(`http://localhost:3010/boards/${props.item.id}`, props.boardTitle, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        console.log("수정성공", res);
+    try {
+      const res = await putBoardsApi(item.id, boardTitle, "rgb(0, 121, 191)");
 
-        const data = res.data;
-        const NewBoardData = data.item;
-
-        console.log("새보드데이터", NewBoardData);
-        setEditToggle(!editToggle);
-        props.setRender(!props.render);
-        props.setBoardTitle("");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      if (res) {
+        const res = await getBoardsApi();
+        dispatch(changeBoardData(res.data.list));
+        setEditToggle(true);
+        setBoardTitle("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const goListClick = () => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
 
-    axios
-      .get(`http://localhost:3010/boards/${props.item.id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        console.log("리스트이동성공", res);
-        if (res.status === 200) {
-          console.log(res.data.item.id);
-          const boardId = res.data.item.id;
-          const data = res.data.item.lists;
-          console.log(data);
-          dispatch(changeBoardData(data));
-          navigate(`/boards/${boardId}`);
-          console.log("리스트이동성공후보드데이터:", boardData);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const goListClick = () => {
+    navigate(`/boards/${item.id}`);
   };
 
   return (
@@ -97,23 +73,23 @@ const BoardItem = (props: any) => {
           <GoTrashcan />
         </button>
       </div>
-      {editToggle === true ? (
+      {editToggle ? (
         <div>
           <div className="boardTitle" onClick={goListClick}>
-            {props.item.title}
+            {item.title}
           </div>
-          <div className="createdAtData">{dayjs(props.item.createdAt).format("YYYY-MM-DD")}</div>
+          <div className="createdAtData">{dayjs(item.createdAt).format("YYYY-MM-DD")}</div>
         </div>
       ) : (
         <form typeof="submit" className="boardAddSubmit" onSubmit={editSubmit}>
           <input
             className="boardAddInput"
-            onChange={props.onChange}
+            onChange={onChange}
             name="title"
-            value={props.boardTitle.title}
+            value={boardTitle}
             onBlur={() => {
               setEditToggle(true);
-              props.setBoardTitle("");
+              setBoardTitle("");
             }}
             autoFocus
           />

@@ -1,49 +1,35 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./style.css";
-import "dragula/dist/dragula.min.css";
 import { changeBoardData, RootState } from "../../store";
 import AddCardList from "../../components/AddCardList";
-import axios from "axios";
 import CardList from "../../components/CardList";
+import { addListApi, getListApi } from "../../api/board";
 
 const BoardPage = () => {
-  const todoContainer = useRef<any>();
   let boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
-  console.log("boardData", boardData);
-
   let { id } = useParams();
-
   const [TitleValue, setTitleValue] = useState("");
-  const [render, setRender] = useState(true);
-  const rendering = () => {
-    setRender(!render);
+  const [bgColor, setBgColor] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getBoard();
+  }, []);
+
+  const getBoard = async () => {
+    const res = await getListApi(id);
+    dispatch(changeBoardData(res.data.item.lists));
+
+    setBgColor(res.data.item.bgColor);
   };
 
-  const dispatch = useDispatch();
-  const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3010/boards/${id}`, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        if (res.status === 200) {
-          const data = res.data;
-          const dataItem = data.item;
-          const dataList = dataItem.lists;
-          dispatch(changeBoardData(dataList));
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [render]);
-
-  const handleAddSubmit = (e: any) => {
+  const handleAddSubmit = async (e: any) => {
+    e.preventDefault();
     if (TitleValue !== "") {
-      e.preventDefault();
       setTitleValue(TitleValue);
       const data = {
         title: TitleValue,
@@ -51,34 +37,29 @@ const BoardPage = () => {
         pos: 65535 + (boardData[boardData.length - 1]?.pos ?? 1),
       };
 
-      axios
-        .post("http://localhost:3010/lists", data, { headers: { Authorization: `Bearer ${accessToken}` } })
-        .then((res) => {
-          console.log("포스트성공!", res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setTitleValue("");
-      setRender(!render);
+      try {
+        const res = await addListApi(data);
+        if (res.status === 201) {
+          getBoard();
+          setTitleValue("");
+        }
+        console.log(res);
+      } catch (error) {}
     }
   };
+  console.log(boardData);
 
   return (
-    <div className="boardContainer">
+    <div
+      className="boardContainer"
+      style={{
+        backgroundColor: bgColor,
+      }}
+    >
       <div className="mainBoard">MainBoard</div>
-      <div className="TodoContainer" ref={todoContainer}>
+      <div className="TodoContainer">
         {boardData.map((item: any) => {
-          return (
-            <CardList
-              item={item}
-              key={item.id}
-              rendering={rendering}
-              TitleValue={TitleValue}
-              setTitleValue={setTitleValue}
-              id={id}
-            />
-          );
+          return <CardList item={item} key={item.id} TitleValue={TitleValue} setTitleValue={setTitleValue} id={id} />;
         })}
         <AddCardList handleAddSubmit={handleAddSubmit} TitleValue={TitleValue} setTitleValue={setTitleValue} />
       </div>

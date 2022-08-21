@@ -1,12 +1,10 @@
 .boardContainer {
   height: calc(100vh - 50px);
-  background-color: #40506c;
 }
 
 .TodoContainer {
   width: 100%;
   overflow-x: scroll;
-  background-color: #40506c;
   padding: 20px;
   vertical-align: top;
   white-space: nowrap;
@@ -39,7 +37,6 @@
   font-weight: 700;
   color: #fff;
   font-size: 30px;
-  background-color: #40506c;
 }
 .addTodoForm .enterBtn {
   display: block;

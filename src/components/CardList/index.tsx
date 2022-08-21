@@ -4,30 +4,30 @@ import { useState } from "react";
 import EditCardList from "../EditCardList";
 import AddCard from "../AddCard";
 import Card from "../Card";
-import dragula from "dragula";
+import { deleteListApi, editListApi, getListApi } from "../../api/board";
+import { useDispatch } from "react-redux";
+import { changeBoardData } from "../../store";
 
-const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
+const CardList = ({ id, setTitleValue, TitleValue, item }: any) => {
+  const dispatch = useDispatch();
   const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
   const [editToggle, setEditToggle] = useState(true);
   const [cardToggle, setCardToggle] = useState(true);
   const [todoValue, setTodoValue] = useState("");
   const [todoData, setTodoData] = useState([]);
 
-  const onRemove = () => {
-    axios
-      .delete(`http://localhost:3010/lists/${item.id}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        console.log("삭제성공", res);
-        rendering();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const onRemove = async () => {
+    try {
+      const res = await deleteListApi(item.id);
+      if (res.status === 204) {
+        const res = await getListApi(id);
+        console.log(res);
+        dispatch(changeBoardData(res.data.item.lists));
+      }
+    } catch (error) {}
   };
 
-  const handleEditSubmit = (e: any) => {
+  const handleEditSubmit = async (e: any) => {
     if (TitleValue !== null) {
       e.preventDefault();
       setTitleValue(TitleValue);
@@ -36,17 +36,14 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
         boardId: id,
         pos: item.pos,
       };
-
-      axios
-        .put(`http://localhost:3010/lists/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-        .then((res) => {
-          console.log("리스트수정성공!", res);
-          rendering();
-          setEditToggle(!editToggle);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        const res = await editListApi(item.id, data);
+        if (res.status === 200) {
+          const res = await getListApi(id);
+          dispatch(changeBoardData(res.data.item.lists));
+        }
+      } catch (error) {}
+      setEditToggle(!editToggle);
       setTitleValue("");
     }
   };
@@ -78,7 +75,6 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
               todoChange={todoChange}
               todoValue={todoValue}
               item={item}
-              rendering={rendering}
               accessToken={accessToken}
             />
           );
@@ -91,7 +87,6 @@ const CardList = ({ id, setTitleValue, TitleValue, rendering, item }: any) => {
         setTodoValue={setTodoValue}
         todoData={todoData}
         setTodoData={setTodoData}
-        rendering={rendering}
         item={item}
         accessToken={accessToken}
       />

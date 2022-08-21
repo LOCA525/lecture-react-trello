@@ -5,7 +5,6 @@ const AddCardList = ({ TitleValue, setTitleValue, handleAddSubmit }: any) => {
 
   const handleChange = (e: any) => {
     setTitleValue(e.target.value);
-    console.log("handleChange바뀌는중");
   };
   return (
     <>

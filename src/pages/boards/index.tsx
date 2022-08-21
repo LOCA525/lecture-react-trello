@@ -1,74 +1,58 @@
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
 import BoardItem from "../../components/BoardItem";
+
+import { getBoardsApi, postBoardsApi } from "../../api/board";
+
 const BoardsPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [render, setRender] = useState(true);
-  const [toggle, setToggle] = useState(true);
-  const [boardTitle, setBoardTitle] = useState({ title: "" });
-  let boardData = useSelector((state: RootState) => {
+  const boardData = useSelector((state: RootState) => {
     return state.boardData;
   });
-  let userEmail = useSelector((state: RootState) => {
+  const userEmail = useSelector((state: RootState) => {
     return state.email;
   });
+
+  const [toggle, setToggle] = useState(true);
+  const [boardTitle, setBoardTitle] = useState<string>("");
+
+  useEffect(() => {
+    getBoards();
+  }, []);
+
+  const getBoards = async () => {
+    const res = await getBoardsApi();
+    dispatch(changeBoardData(res.data.list));
+  };
 
   const handleAddClick = (e: any) => {
     setToggle(!toggle);
   };
+
   const onChange = (e: any) => {
-    setBoardTitle({ title: e.target.value });
+    setBoardTitle(e.target.value);
   };
-  const onSubmit = (e: any) => {
-    const titleValue = boardTitle.title;
 
-    if (titleValue !== null && titleValue !== "" && boardTitle !== null) {
-      const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-
-      e.preventDefault();
-      setToggle(!toggle);
-      axios
-        .post("http://localhost:3010/boards", boardTitle, { headers: { Authorization: `Bearer ${accessToken}` } })
-        .then((res) => {
-          const data = res.data;
-          const NewBoardData = data.item;
-
-          setBoardTitle({ title: "" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      console.log("보드타이틀!!!!!", boardTitle);
-    } else {
-      alert("내용을 입력하세요.");
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    setToggle(!toggle);
+    try {
+      if (boardTitle && boardTitle !== "") {
+        const res = await postBoardsApi(boardTitle);
+        if (res.status === 201) {
+          getBoards();
+          setBoardTitle("");
+        }
+      } else {
+        alert("내용을 입력하세요.");
+      }
+    } catch (error) {
+      console.log("error", error);
     }
   };
-
-  useEffect(() => {
-    const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-
-    axios
-      .get("http://localhost:3010/boards", { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then((res) => {
-        if (res.status === 200) {
-          const data = res.data;
-          const dataList = data.list;
-          dispatch(changeBoardData(dataList));
-        }
-      })
-      .catch((err) => {
-        if (err.response.status) {
-          navigate("/login");
-        }
-      });
-  }, [toggle, render]);
 
   return (
     <div>
@@ -81,20 +65,10 @@ const BoardsPage = () => {
         </div>
         <div className="boardBox">
           {boardData.map((item: any) => {
-            return (
-              <BoardItem
-                item={item}
-                key={item.id}
-                render={render}
-                setRender={setRender}
-                onChange={onChange}
-                boardTitle={boardTitle}
-                setBoardTitle={setBoardTitle}
-              />
-            );
+            return <BoardItem item={item} key={item.id} />;
           })}
 
-          {toggle === true ? (
+          {toggle ? (
             <button className="addBoardBtn" onClick={handleAddClick}>
               <div>Create new board</div>
             </button>
@@ -107,10 +81,10 @@ const BoardsPage = () => {
                   onChange={onChange}
                   onBlur={() => {
                     setToggle(true);
-                    setBoardTitle({ title: "" });
+                    setBoardTitle("");
                   }}
                   name="title"
-                  value={boardTitle.title}
+                  value={boardTitle}
                   autoFocus
                 />
                 <button
