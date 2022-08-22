@@ -69,6 +69,7 @@ const CardList = ({ id, setTitleValue, TitleValue, item }: any) => {
             <Card
               index={index}
               key={item.id}
+              id={id}
               setTodoValue={setTodoValue}
               setTodoData={setTodoData}
               todoData={todoData}
@@ -88,6 +89,7 @@ const CardList = ({ id, setTitleValue, TitleValue, item }: any) => {
         todoData={todoData}
         setTodoData={setTodoData}
         item={item}
+        id={id}
         accessToken={accessToken}
       />
     </div>

@@ -1,28 +1,27 @@
 import "./style.css";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { GoPencil, GoTrashcan } from "react-icons/go";
+import { deleteCardApi, eidtCardApi, getListApi } from "../../api/board";
+import { useDispatch } from "react-redux";
+import { changeBoardData } from "../../store";
 
-const Card = ({ setTodoValue, item, rendering, todoChange, todoValue, index }: any) => {
-  const accessToken = JSON.parse(localStorage.getItem("accessToken") as string);
-
+const Card = ({ setTodoValue, id, item, rendering, todoChange, todoValue, index }: any) => {
+  const dispatch = useDispatch();
   const [editToggle2, setEditToggle2] = useState(true);
 
-  const todoDeleteClick = () => {
-    axios
-      .delete(`http://localhost:3010/cards/${item.id}`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((res) => {
-        console.log("삭제성공", res);
-        rendering();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const todoDeleteClick = async () => {
+    try {
+      const res = await deleteCardApi(item.id);
+      if (res.status === 204) {
+        const res = await getListApi(id);
+        dispatch(changeBoardData(res.data.item.lists));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const todoEditSubmit = (e: any) => {
+  const todoEditSubmit = async (e: any) => {
     if (todoValue !== null) {
       e.preventDefault();
       const data = {
@@ -31,17 +30,17 @@ const Card = ({ setTodoValue, item, rendering, todoChange, todoValue, index }: a
         pos: item.pos,
       };
 
-      axios
-        .put(`http://localhost:3010/cards/${item.id}`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-        .then((res) => {
-          console.log("카드수정성공!", res);
+      try {
+        const res = await eidtCardApi(item.id, data);
+        if (res.status === 200) {
+          const res = await getListApi(id);
+          dispatch(changeBoardData(res.data.item.lists));
           setTodoValue("");
-          rendering();
           setEditToggle2(!editToggle2);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -25,6 +25,7 @@ const BoardPage = () => {
     dispatch(changeBoardData(res.data.item.lists));
 
     setBgColor(res.data.item.bgColor);
+    console.log("getBoard", res);
   };
 
   const handleAddSubmit = async (e: any) => {

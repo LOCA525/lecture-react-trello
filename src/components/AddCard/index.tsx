@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addCardApi, getCardApi } from "../../api/board";
+import { addCardApi, getCardApi, getListApi } from "../../api/board";
+import { changeBoardData } from "../../store";
 
 const AddCard = ({
   accessToken,
@@ -12,12 +13,9 @@ const AddCard = ({
   setTodoData,
   rendering,
   item,
+  id,
 }: any) => {
   const dispatch = useDispatch();
-  const getCard = async () => {
-    const res = await getCardApi(item.id);
-    console.log(res);
-  };
 
   const todoSubmit = async (e: any) => {
     if (todoValue !== "") {
@@ -30,19 +28,13 @@ const AddCard = ({
       setTodoData([...todoData, data]);
 
       try {
-        addCardApi(data);
-        getCard();
+        const res = await addCardApi(data);
+        if (res.status === 201) {
+          const res = await getListApi(id);
+          dispatch(changeBoardData(res.data.item.lists));
+        }
       } catch (error) {}
-      // axios
-      //   .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-      //   .then((res) => {
-      //     console.log("카드추가성공!", res);
-      //     console.log("item.cards:", item.cards);
-      //     rendering();
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+
       setCardToggle(!cardToggle);
       setTodoValue("");
     }

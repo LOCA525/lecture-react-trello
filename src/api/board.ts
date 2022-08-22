@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
 import http from ".";
 
+///Board
 export const getBoardsApi = async () => {
   const res = await http.get("/boards");
   return res;
@@ -21,6 +21,7 @@ export const putBoardsApi = async (id: number, title: string, bgColor: string) =
   return res;
 };
 
+///List
 export const getListApi = async (id: any) => {
   const res = await http.get(`/boards/${id}`);
   return res;
@@ -40,7 +41,7 @@ export const deleteListApi = async (id: any) => {
   const res = await http.delete(`/lists/${id}`);
   return res;
 };
-
+///card
 export const getCardApi = async (id: any) => {
   const res = await http.get(`/cards/${id}`);
   return res;
@@ -48,5 +49,15 @@ export const getCardApi = async (id: any) => {
 
 export const addCardApi = async (data: any) => {
   const res = await http.post("/cards", data);
+  return res;
+};
+
+export const deleteCardApi = async (id: any) => {
+  const res = await http.delete(`/cards/${id}`);
+  return res;
+};
+
+export const eidtCardApi = async (id: any, data: any) => {
+  const res = await http.put(`/cards/${id}`, data);
   return res;
 };
