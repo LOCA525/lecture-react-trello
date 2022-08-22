@@ -47,7 +47,6 @@ const BoardPage = () => {
       } catch (error) {}
     }
   };
-  console.log(boardData);
 
   return (
     <div

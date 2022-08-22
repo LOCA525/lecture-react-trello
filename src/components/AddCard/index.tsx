@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addCardApi, getCardApi } from "../../api/board";
 
 const AddCard = ({
   accessToken,
@@ -11,7 +13,13 @@ const AddCard = ({
   rendering,
   item,
 }: any) => {
-  const todoSubmit = (e: any) => {
+  const dispatch = useDispatch();
+  const getCard = async () => {
+    const res = await getCardApi(item.id);
+    console.log(res);
+  };
+
+  const todoSubmit = async (e: any) => {
     if (todoValue !== "") {
       e.preventDefault();
       const data = {
@@ -20,18 +28,21 @@ const AddCard = ({
         pos: 65535 + (item.cards[item.cards.length - 1]?.pos ?? 1), //포지션값 설정 마지막 요소의 포지션값 //옵셔널 체이닝
       };
       setTodoData([...todoData, data]);
-      console.log("todoData", todoData);
-      axios
-        .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
-        .then((res) => {
-          console.log("카드추가성공!", res);
-          console.log("item.cards:", item.cards);
 
-          rendering();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      try {
+        addCardApi(data);
+        getCard();
+      } catch (error) {}
+      // axios
+      //   .post(`http://localhost:3010/cards`, data, { headers: { Authorization: `Bearer ${accessToken}` } })
+      //   .then((res) => {
+      //     console.log("카드추가성공!", res);
+      //     console.log("item.cards:", item.cards);
+      //     rendering();
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
       setCardToggle(!cardToggle);
       setTodoValue("");
     }

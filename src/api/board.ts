@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import http from ".";
 
 export const getBoardsApi = async () => {
@@ -37,5 +38,15 @@ export const editListApi = async (id: string, data: any) => {
 
 export const deleteListApi = async (id: any) => {
   const res = await http.delete(`/lists/${id}`);
+  return res;
+};
+
+export const getCardApi = async (id: any) => {
+  const res = await http.get(`/cards/${id}`);
+  return res;
+};
+
+export const addCardApi = async (data: any) => {
+  const res = await http.post("/cards", data);
   return res;
 };
