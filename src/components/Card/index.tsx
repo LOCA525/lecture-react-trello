@@ -5,7 +5,7 @@ import { deleteCardApi, eidtCardApi, getListApi } from "../../api/board";
 import { useDispatch } from "react-redux";
 import { changeBoardData } from "../../store";
 
-const Card = ({ setTodoValue, id, item, rendering, todoChange, todoValue, index }: any) => {
+const Card = ({ setTodoValue, id, item, todoChange, todoValue, index }: any) => {
   const dispatch = useDispatch();
   const [editToggle2, setEditToggle2] = useState(true);
 

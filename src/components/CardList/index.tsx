@@ -1,5 +1,4 @@
 import "./style.css";
-import axios from "axios";
 import { useState } from "react";
 import EditCardList from "../EditCardList";
 import AddCard from "../AddCard";

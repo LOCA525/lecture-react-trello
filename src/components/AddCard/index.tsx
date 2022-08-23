@@ -1,20 +1,8 @@
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addCardApi, getCardApi, getListApi } from "../../api/board";
+import { addCardApi, getListApi } from "../../api/board";
 import { changeBoardData } from "../../store";
 
-const AddCard = ({
-  accessToken,
-  cardToggle,
-  setCardToggle,
-  todoValue,
-  setTodoValue,
-  todoData,
-  setTodoData,
-  rendering,
-  item,
-  id,
-}: any) => {
+const AddCard = ({ cardToggle, setCardToggle, todoValue, setTodoValue, todoData, setTodoData, item, id }: any) => {
   const dispatch = useDispatch();
 
   const todoSubmit = async (e: any) => {
