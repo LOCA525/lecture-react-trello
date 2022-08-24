@@ -81,6 +81,7 @@
   background-color: transparent;
   color: #fff;
 }
+
 .enterBtn {
   vertical-align: top;
   padding: 1px;
@@ -90,6 +91,12 @@
   line-height: 15px;
 }
 
+.bgColorBtn {
+  cursor: pointer;
+  color: #fff;
+  margin-right: 5px;
+  display: none;
+}
 .deleteBtn {
   cursor: pointer;
   color: #fff;

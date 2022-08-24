@@ -1,12 +1,11 @@
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { GoTrashcan, GoPencil } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { changeBoardData, RootState } from "../../store";
 import dayjs from "dayjs";
 import { deleteBoardsApi, getBoardsApi, putBoardsApi } from "../../api/board";
-
+import { IoColorPaletteSharp } from "react-icons/io5";
 interface Props {
   item: any;
 }
@@ -61,6 +60,10 @@ const BoardItem = ({ item }: Props) => {
   return (
     <div className="boardItem">
       <div className="navyLine">
+        <button className="bgColorBtn" onClick={() => {}}>
+          <IoColorPaletteSharp />
+        </button>
+
         <button
           className="editBtn"
           onClick={() => {
