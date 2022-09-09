@@ -6,6 +6,7 @@ import { changeBoardData, RootState } from "../../store";
 import dayjs from "dayjs";
 import { deleteBoardsApi, getBoardsApi, putBoardsApi } from "../../api/board";
 import { IoColorPaletteSharp } from "react-icons/io5";
+
 interface Props {
   item: any;
 }
@@ -23,7 +24,6 @@ const BoardItem = ({ item }: Props) => {
   const onChange = (e: any) => {
     setBoardTitle(e.target.value);
   };
-
   const onRemove = async () => {
     try {
       const res = await deleteBoardsApi(item.id);

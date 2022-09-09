@@ -13,12 +13,3 @@
   width: 100px;
   cursor: pointer;
 }
-
-.Nav .userName {
-  font-size: 15px;
-  background-color: #1d232e;
-  color: #fff;
-  position: absolute;
-  top: 40px;
-  right: 10px;
-}
