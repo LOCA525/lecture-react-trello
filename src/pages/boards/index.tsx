@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { changeBoardData, RootState } from "../../store";
 import { GoPerson } from "react-icons/go";
 import BoardItem from "../../components/BoardItem";
-import { HexColorPicker } from "react-colorful";
 import { getBoardsApi, postBoardsApi } from "../../api/board";
 
 const BoardsPage = () => {
@@ -64,7 +63,6 @@ const BoardsPage = () => {
           </h2>
         </div>
         <div className="boardBox">
-          <HexColorPicker />;
           {boardData.map((item: any) => {
             return <BoardItem item={item} key={item.id} />;
           })}
